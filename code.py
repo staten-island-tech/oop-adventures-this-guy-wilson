@@ -1,5 +1,8 @@
 import tkinter as tk
 import random
+
+
+def __init__(self, name, strength, )
 window = tk.Tk()
 window.title("OOP Adventures") 
 window.geometry("400x250") 
@@ -13,3 +16,4 @@ result_label = tk.Label(window, text="", font=("Arial", 14, "bold"),
 fg="blue")
 result_label.pack(pady=15)
 window.mainloop()
+
