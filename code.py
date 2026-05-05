@@ -9,6 +9,22 @@ class Hero:
         self.inventory = inventory
         self.stats = stats
 
+class Market:
+    def __init__(self):
+        pass
+
+    def buy(self, balance, cost, item):
+        try:
+            int(balance) - int(cost)
+        except int(cost) > int(balance):
+            print("You cannot buy this item")
+        else:
+            Hero.inventory.append(item)
+            return balance
+
+Elias = Hero("Elias", 100, 1000, ["Stone Sword", "Wooden Shield"], 10, 0)
+The_Market = Market()
+
 window = tk.Tk()
 window.title("OOP Adventures") 
 window.geometry("1200x800") 
@@ -18,7 +34,7 @@ prompt = tk.Label(window, text="Type your message below:",
 font=("Calibri", 28))
 prompt.pack(pady=20)
 
-entry = tk.Entry(window, font=("Calibri", 28), width=60)
+entry = tk.Entry(window, font=("Calibri", 28), width=50)
 entry.pack(pady=10)
 
 
