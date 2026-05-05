@@ -1,8 +1,23 @@
 import tkinter as tk
 import random
 
+class Monster:
+    def __init__(self, name, strength, health, invetory ):
+        self.name = name
+        self.strength = strength
+        self.health = health
+        self.invetory = invetory 
+    
 
-def __init__(self, name, strength, )
+
+
+
+
+
+
+
+
+
 window = tk.Tk()
 window.title("OOP Adventures") 
 window.geometry("400x250") 
