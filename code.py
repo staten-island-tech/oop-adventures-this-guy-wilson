@@ -21,6 +21,14 @@ class Market:
         else:
             Hero.inventory.append(item)
             return balance
+class Event:
+    def __init__(self):
+        pass
+
+    def random_event_modifier(self):
+        randomeventmodifier = random.randint(0,100)
+        if randomeventmodifier < 80:
+            pass
 
 Elias = Hero("Elias", 100, 1000, ["Stone Sword", "Wooden Shield"], 10, 0)
 The_Market = Market()
