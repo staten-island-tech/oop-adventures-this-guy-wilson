@@ -79,3 +79,7 @@ result_label.pack(pady=30)
 
 
 window.mainloop()
+
+while Elias.health <= 0:
+    pass
+print(Elias.stats)
