@@ -2,11 +2,17 @@ import tkinter as tk
 import random
 
 class Monster:
-    def __init__(self, name, strength, health, invetory ):
+    def __init__(self, name, strength, health, inventory ):
         self.name = name
         self.strength = strength
         self.health = health
-        self.invetory = invetory 
+        self.invetory = inventory 
+        
+
+        def dead(self):
+            return self.health <=0
+        
+
     
 
 
