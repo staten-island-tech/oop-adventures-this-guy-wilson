@@ -21,6 +21,29 @@ class Market:
         else:
             Hero.inventory.append(item)
             return balance
+
+class Enemy:
+    def __init__(self, name, strength, health, attack):
+        self.name = name
+        self.strength = strength
+        self.health = health
+        self.attack = attack
+    
+    def death(self, loot):
+        print(f"The {Enemy.name} has been slained.")
+        print(f"{loot}""\n")
+        heroinventoryamount = len(Hero.inventory)
+        if heroinventoryamount <= 5:
+            while lootchoose not in loot:
+                lootchoose = input("Choose an item")
+                if lootchoose in loot:
+                    Hero.inventory.append(lootchoose)
+                else:
+                    print("Invalid")
+        else:
+            print("Max inventory.")
+        return
+
 class Event:
     def __init__(self):
         pass
@@ -30,7 +53,7 @@ class Event:
         if randomeventmodifier < 80:
             pass
 
-Elias = Hero("Elias", 100, 1000, ["Stone Sword", "Wooden Shield"], 10, 0)
+Elias = Hero("Elias", 100, 1000, ["Stone Sword", "Wooden Shield"], 0)
 The_Market = Market()
 
 window = tk.Tk()
@@ -41,6 +64,10 @@ window.resizable(False, False)
 prompt = tk.Label(window, text="Type your message below:",
 font=("Calibri", 28))
 prompt.pack(pady=20)
+
+healthstatus = tk.Label(window, text=f"{Elias.health}/100", font=("Calibri", 20))
+healthstatus.pack(pady=20)
+healthstatus.place(x=600, y=600)
 
 entry = tk.Entry(window, font=("Calibri", 28), width=50)
 entry.pack(pady=10)
