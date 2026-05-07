@@ -53,9 +53,44 @@ class Event:
         if randomeventmodifier < 80:
             pass
 
-Elias = Hero("Elias", 100, 1000, ["Stone Sword", "Wooden Shield"], 0)
+Elias = Hero("Elias", 100, 1000, ["wooden stick", "Wooden Shield"], 0)
 The_Market = Market()
+store = [
+    {"name": "wooden armour",
+    "price": 10,
+    "department": "defense",},
 
+    {"name": "steel armour",
+    "price": 50,
+    "department": "defense",},
+
+    {"name": "diamond armour",
+    "price": 100,
+    "department": "defense"}
+
+    {"name": "wooden sword",
+    "price": 10,
+    "department": "offense",},
+
+    {"name": " steel sword",
+    "price": 50,
+    "department": "offense",},
+
+    {"name": "diamond sword",
+    "price": 100,
+    "department": "offense"}
+
+    {"name": "cat",
+    "price": 100000,
+    "department": "tiktok",},
+
+    {"name": "human hand",
+    "price": 100000,
+    "department": "human",},
+
+    {"name": "pickle",
+    "price": 10,
+    "department": "food"}]
 window = tk.Tk()
 window.title("OOP Adventures") 
 window.geometry("1200x800") 
