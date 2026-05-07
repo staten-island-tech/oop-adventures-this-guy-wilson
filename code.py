@@ -13,14 +13,26 @@ class Market:
     def __init__(self):
         pass
 
-    def buy(self, balance, cost, item):
-        try:
-            int(balance) - int(cost)
-        except int(cost) > int(balance):
-            print("You cannot buy this item")
-        else:
-            Hero.inventory.append(item)
-            return balance
+    def check(self, market_items):
+        print(market_items)
+    
+    def buy(self, balance, cost, item, items):
+        item = input("What would you like to buy?")
+        while item != "exit":
+            if item in items:
+                try:
+                    int(balance) - int(cost)
+                except int(cost) > int(balance):
+                    print("You cannot buy this item")
+                else:
+                    if item == "health potion":
+                        Hero.health += 20
+                    else:
+                        Hero.inventory.append(item)
+                        return balance
+            else:
+                print("No item found.")
+            item = input("What would you like to buy?")
 
 class Enemy:
     def __init__(self, name, strength, health, attack):
@@ -82,7 +94,7 @@ store = [
 
     {"name": "cat",
     "price": 100000,
-    "department": "tiktok",},
+    "department": "animal",},
 
     {"name": "human hand",
     "price": 100000,
@@ -90,7 +102,22 @@ store = [
 
     {"name": "pickle",
     "price": 10,
-    "department": "food"}]
+    "department": "food"}
+
+    {"name": "health potion",
+    "price": 150,
+    "department": "potion",},
+
+    {"name": "strength potion",
+    "price": 150,
+    "department": "potion",},
+
+    {"name": "speed potion",
+    "price": 150,
+    "department": "potion"}
+]
+
+
 window = tk.Tk()
 window.title("OOP Adventures") 
 window.geometry("1200x800") 
