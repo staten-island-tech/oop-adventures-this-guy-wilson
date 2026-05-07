@@ -53,8 +53,7 @@ class Event:
         if randomeventmodifier < 80:
             pass
 
-Elias = Hero("Elias", 100, 1000, ["Stone Sword", "Wooden Shield"], 0)
-The_Market = Market()
+charactername = input("Choose character name.""\n")
 
 window = tk.Tk()
 window.title("OOP Adventures") 
@@ -65,21 +64,22 @@ prompt = tk.Label(window, text="Type your message below:",
 font=("Calibri", 28))
 prompt.pack(pady=20)
 
+entry = tk.Entry(window, font=("Calibri", 28), width=50)
+entry.pack(pady=10)
+
+Elias = Hero(f"{charactername}", 100, 1000, ["Stone Sword", "Wooden Shield"], 0)
+The_Market = Market()
+
+windowname = tk.Label(window, text=f"{Elias.name}", font=("Calibri", 30))
+windowname.pack(pady=20)
+windowname.place(x=200, y= 590)
+
 healthstatus = tk.Label(window, text=f"{Elias.health}/100", font=("Calibri", 20))
 healthstatus.pack(pady=20)
 healthstatus.place(x=600, y=600)
 
-entry = tk.Entry(window, font=("Calibri", 28), width=50)
-entry.pack(pady=10)
-
-
-result_label = tk.Label(window, text="", font=("Calibri", 28, "bold"),
-fg="blue")
-result_label.pack(pady=30)
-
-
-window.mainloop()
-
 while Elias.health <= 0:
     pass
-print(Elias.stats)
+print(Elias.name, "has died! Your final score is", Elias.stats)
+
+window.mainloop()
