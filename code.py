@@ -35,12 +35,20 @@ class Market:
             item = input("What would you like to buy?")
 
 class Enemy:
-    def __init__(self, name, strength, health, attack):
+    def __init__(self, name, strength, health, attack, score):
+        self.score = score
         self.name = name
         self.strength = strength
         self.health = health
         self.attack = attack
     
+    def battle_hill(self, enemyname, enemyhealth, enemyattack, enemyscore):
+        print(f"An {enemyname} has spawned!""\n")
+        print(f"Health:{enemyhealth}, Base Attack:{enemyattack}")
+        Enemy.death("Money")
+        Hero.stats += enemyscore
+        pass
+
     def death(self, loot):
         print(f"The {Enemy.name} has been slained.")
         print(f"{loot}""\n")
@@ -60,10 +68,24 @@ class Event:
     def __init__(self):
         pass
 
-    def random_event_modifier(self):
+    def random_event_modifier(self, maxhealth):
         randomeventmodifier = random.randint(0,100)
-        if randomeventmodifier < 80:
-            pass
+        if Hero.health < maxhealth:
+            Hero.health += (maxhealth*0.05)
+        if randomeventmodifier >= 90:
+            if (randomeventmodifier <= 91) and (randomeventmodifier <= 95):
+                Enemy.battle_hill("Goblin", 25, 2, 100)
+            elif randomeventmodifier == 96:
+                Enemy.battle_hill("Vampire", 50, 5, 200)
+            elif randomeventmodifier == 97:
+                Enemy.battle_hill("Witch", 150, 15, 500)
+            elif randomeventmodifier == 98:
+                Enemy.battle_hill("Regi", 500, 50, 2000)
+            elif randomeventmodifier == 99:
+                Enemy.battle_hill("Balrog", 1000, 100, 5000)
+            elif randomeventmodifier == 100:
+                Enemy.battle_hill("Garry Kasparov", 2851, 285, 28510)
+        
 
 store = [
     {"name": "wooden armour",
