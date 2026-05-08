@@ -136,7 +136,7 @@ prompt.pack(pady=20)
 entry = tk.Entry(window, font=("Calibri", 28), width=50)
 entry.pack(pady=10)
 
-Elias = Hero(f"{charactername}", 100, 100, 100, 1000, ["Stone Sword", "Wooden Shield"], 0)
+Elias = Hero(f"{charactername}", 100, 100, 100, 1000, ["wooden sword", "Wooden Shield"], 0)
 The_Market = Market()
 
 windowname = tk.Label(window, text=f"{Elias.name}", font=("Calibri", 30))
