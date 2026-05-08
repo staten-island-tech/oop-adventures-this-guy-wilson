@@ -2,12 +2,15 @@ import tkinter as tk
 import random
 
 class Hero:
-    def __init__(self, name, health, balance, inventory, stats):
+    def __init__(self, name, health, speed, strength, balance, inventory, stats):
         self.name = name
         self.health = health
         self.balance = balance
         self.inventory = inventory
+        self.speed = speed
+        self.strength=strength
         self.stats = stats
+        
 
 class Market:
     def __init__(self):
@@ -27,7 +30,11 @@ class Market:
                 else:
                     if item == "health potion":
                         Hero.health += 20
-                    else:
+                    elif item == "speed potion":
+                        Hero.speed +=20
+                    elif item == "strength potion":
+                        Hero.strength +=20
+                       
                         Hero.inventory.append(item)
                         return balance
             else:
@@ -65,20 +72,18 @@ class Event:
         if randomeventmodifier < 80:
             pass
 
-Elias = Hero("Elias", 100, 1000, ["wooden stick", "Wooden Shield"], 0)
-The_Market = Market()
 store = [
     {"name": "wooden armour",
     "price": 10,
     "department": "defense",},
-
+    
     {"name": "steel armour",
     "price": 50,
     "department": "defense",},
-
+    
     {"name": "diamond armour",
     "price": 100,
-    "department": "defense"}
+    "department": "defense"},
 
     {"name": "wooden sword",
     "price": 10,
@@ -90,7 +95,7 @@ store = [
 
     {"name": "diamond sword",
     "price": 100,
-    "department": "offense"}
+    "department": "offense"},
 
     {"name": "cat",
     "price": 100000,
@@ -102,7 +107,7 @@ store = [
 
     {"name": "pickle",
     "price": 10,
-    "department": "food"}
+    "department": "food"},
 
     {"name": "health potion",
     "price": 150,
@@ -117,6 +122,7 @@ store = [
     "department": "potion"}
 ]
 
+charactername = input("Choose character name.""\n")
 
 window = tk.Tk()
 window.title("OOP Adventures") 
@@ -127,17 +133,22 @@ prompt = tk.Label(window, text="Type your message below:",
 font=("Calibri", 28))
 prompt.pack(pady=20)
 
+entry = tk.Entry(window, font=("Calibri", 28), width=50)
+entry.pack(pady=10)
+
+Elias = Hero(f"{charactername}", 100, 100, 100, 1000, ["Stone Sword", "Wooden Shield"], 0)
+The_Market = Market()
+
+windowname = tk.Label(window, text=f"{Elias.name}", font=("Calibri", 30))
+windowname.pack(pady=20)
+windowname.place(x=200, y= 590)
+
 healthstatus = tk.Label(window, text=f"{Elias.health}/100", font=("Calibri", 20))
 healthstatus.pack(pady=20)
 healthstatus.place(x=600, y=600)
 
-entry = tk.Entry(window, font=("Calibri", 28), width=50)
-entry.pack(pady=10)
-
-
-result_label = tk.Label(window, text="", font=("Calibri", 28, "bold"),
-fg="blue")
-result_label.pack(pady=30)
-
+while Elias.health <= 0:
+    pass
+print(Elias.name, "has died! Your final score is", Elias.stats)
 
 window.mainloop()
