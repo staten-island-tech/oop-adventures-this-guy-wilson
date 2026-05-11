@@ -2,13 +2,14 @@ import tkinter as tk
 import random
 
 class Hero:
-    def __init__(self, name, health, balance, inventory, stats, maxhealth):
+    def __init__(self, name, health, balance, inventory, stats, maxhealth, speed):
         self.name = name
         self.health = health
         self.balance = balance
         self.inventory = inventory
         self.stats = stats
         self.maxhealth = maxhealth
+        self.speed = speed
 
 class Market:
     def __init__(self):
@@ -36,16 +37,32 @@ class Market:
             item = input("What would you like to buy?")
 
 class Enemy:
-    def __init__(self, name, strength, health, attack, score):
+    def __init__(self, name, strength, health, attack, score, speed):
         self.score = score
         self.name = name
         self.strength = strength
         self.health = health
         self.attack = attack
+        self.speed = speed
     
-    def battle_hill(self, enemyname, enemyhealth, enemyattack, enemyscore):
+    def battle_hill(self, enemyname, enemyhealth, baseattack, enemyscore, enemyspeed, attackname, attackpower):
         print(f"An {enemyname} has spawned!""\n")
-        print(f"Health:{enemyhealth}, Base Attack:{enemyattack}")
+        print(f"Health:{enemyhealth}, Base Attack:{baseattack}")
+        while (enemyhealth > 0) or (Hero.health > 0):
+            enemy_attack_choose = random.randint(0,4)
+            if Hero.speed >= enemyspeed:
+                pass
+            else:
+                if enemy_attack_choose == 4:
+                    print(f"The {enemyname} uses the base attack.")
+                    attackpower = baseattack
+                    Hero.health -= attackpower
+                elif enemy_attack_choose == 3:
+                    enemyspeed += attackpower[enemy_attack_choose]
+                else:
+                    print(f"The {enemyname} uses {attackname[enemy_attack_choose]}.")
+                    Hero.health -= attackpower[enemy_attack_choose]
+                pass
         Enemy.death("Money")
         Hero.stats += enemyscore
         pass
@@ -75,17 +92,17 @@ class Event:
             Hero.health += (maxhealth*0.05)
         if randomeventmodifier >= 90:
             if (randomeventmodifier <= 91) and (randomeventmodifier <= 95):
-                Enemy.battle_hill("Goblin", 25, 2, 100)
+                Enemy.battle_hill("Goblin", 25, 5, 100, 25, ("Cut", "Treasure-Dive", "Lock", "Metronome"), (2, 6, 10, 5))
             elif randomeventmodifier == 96:
-                Enemy.battle_hill("Vampire", 50, 5, 200)
+                Enemy.battle_hill("Vampire", 75, 10, 200, 40)
             elif randomeventmodifier == 97:
-                Enemy.battle_hill("Witch", 150, 15, 500)
+                Enemy.battle_hill("Witch", 150, 15, 500, 20)
             elif randomeventmodifier == 98:
-                Enemy.battle_hill("Regi", 500, 50, 2000)
+                Enemy.battle_hill("Regi", 500, 50, 2000, 70)
             elif randomeventmodifier == 99:
-                Enemy.battle_hill("Balrog", 1000, 100, 5000)
+                Enemy.battle_hill("Balrog", 1000, 100, 5000, 30)
             elif randomeventmodifier == 100:
-                Enemy.battle_hill("Garry Kasparov", 2851, 285, 28510)
+                Enemy.battle_hill("Garry Kasparov", 2851, 285, 28510, 100)
         
 
 store = [
@@ -105,7 +122,7 @@ store = [
     "price": 10,
     "department": "offense",},
 
-    {"name": " steel sword",
+    {"name": "steel sword",
     "price": 50,
     "department": "offense",},
 
@@ -149,7 +166,7 @@ prompt = tk.Label(window, text="Character status",
 font=("Calibri", 28))
 prompt.pack(pady=20)
 
-Elias = Hero(f"{charactername}", 100, 1000, ["Stone Sword", "Wooden Shield"], 0, 100)
+Elias = Hero(f"{charactername}", 100, 1000, ["Stone Sword", "Wooden Shield"], 0, 100, 50)
 The_Market = Market()
 
 windowname = tk.Label(window, text=f"{Elias.name}", font=("Calibri", 30))
