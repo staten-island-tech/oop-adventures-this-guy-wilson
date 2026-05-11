@@ -65,7 +65,8 @@ class Enemy:
 
 class Event:
     def __init__(self):
-        pass
+        pass    
+
 
     def random_event_modifier(self):
         randomeventmodifier = random.randint(0,100)
@@ -99,11 +100,11 @@ store = [
 
     {"name": "cat",
     "price": 100000,
-    "department": "animal",},
+    "department": "test subjects",},
 
     {"name": "human hand",
-    "price": 100000,
-    "department": "human",},
+    "price": 100000000,
+    "department": "test subjects",},
 
     {"name": "pickle",
     "price": 10,
@@ -132,7 +133,6 @@ window.resizable(False, False)
 prompt = tk.Label(window, text="Type your message below:",
 font=("Calibri", 28))
 prompt.pack(pady=20)
-
 entry = tk.Entry(window, font=("Calibri", 28), width=50)
 entry.pack(pady=10)
 
