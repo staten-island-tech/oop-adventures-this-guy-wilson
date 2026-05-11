@@ -94,11 +94,11 @@ class Event:
             if (randomeventmodifier <= 91) and (randomeventmodifier <= 95):
                 Enemy.battle_hill("Goblin", 25, 5, 100, 25, ("Cut", "Treasure-Dive", "Lock", "Metronome"), (2, 6, 10, 5))
             elif randomeventmodifier == 96:
-                Enemy.battle_hill("Vampire", 75, 10, 200, 40)
+                Enemy.battle_hill("Vampire", 75, 10, 200, 40, ("Batwave", "Bite", "Bloodshear", "Floatation Dive"), (5, 10, 20, 5))
             elif randomeventmodifier == 97:
-                Enemy.battle_hill("Witch", 150, 15, 500, 20)
+                Enemy.battle_hill("Witch", 150, 15, 500, 20, ("Staffswing", "Potions", "Blind Illusions", "Speed Potion"), (8, 15, 25, 10))
             elif randomeventmodifier == 98:
-                Enemy.battle_hill("Regi", 500, 50, 2000, 70)
+                Enemy.battle_hill("Regi", 500, 30, 2000, 20, ("Ice Shard", "Bulk Stomp", "Mirage Blast", "Weight Loss"), (15, 30, 50, 15))
             elif randomeventmodifier == 99:
                 Enemy.battle_hill("Balrog", 1000, 100, 5000, 30)
             elif randomeventmodifier == 100:
