@@ -2,12 +2,13 @@ import tkinter as tk
 import random
 
 class Hero:
-    def __init__(self, name, health, balance, inventory, stats):
+    def __init__(self, name, health, balance, inventory, stats, maxhealth):
         self.name = name
         self.health = health
         self.balance = balance
         self.inventory = inventory
         self.stats = stats
+        self.maxhealth = maxhealth
 
 class Market:
     def __init__(self):
@@ -144,21 +145,18 @@ window.title("OOP Adventures")
 window.geometry("1200x800") 
 window.resizable(False, False)
 
-prompt = tk.Label(window, text="Type your message below:",
+prompt = tk.Label(window, text="Character status",
 font=("Calibri", 28))
 prompt.pack(pady=20)
 
-entry = tk.Entry(window, font=("Calibri", 28), width=50)
-entry.pack(pady=10)
-
-Elias = Hero(f"{charactername}", 100, 1000, ["Stone Sword", "Wooden Shield"], 0)
+Elias = Hero(f"{charactername}", 100, 1000, ["Stone Sword", "Wooden Shield"], 0, 100)
 The_Market = Market()
 
 windowname = tk.Label(window, text=f"{Elias.name}", font=("Calibri", 30))
 windowname.pack(pady=20)
-windowname.place(x=200, y= 590)
+windowname.place(x=200, y= 600)
 
-healthstatus = tk.Label(window, text=f"{Elias.health}/100", font=("Calibri", 20))
+healthstatus = tk.Label(window, text=f"{Elias.health}/{Elias.maxhealth}", font=("Calibri", 30))
 healthstatus.pack(pady=20)
 healthstatus.place(x=600, y=600)
 
