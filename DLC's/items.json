@@ -9,5 +9,65 @@
         "name": "steel armour",
         "price": 50,
         "department": "defense"
+    },
+    {
+        "id": 3,
+        "name": "diamond armour",
+        "price": 100,
+        "department": "defense"
+    },
+    {
+        "id": 4,
+        "name": "wooden sword",
+        "price": 10,
+        "department": "offense",
+    },
+    {
+        "id": 5,
+        "name": "steel sword",
+        "price": 50,
+        "department": "offense",
+    },
+    {
+        "id": 6,
+        "name": "diamond sword",
+        "price": 100,
+        "department": "offense"
+    },
+    {
+        "id": 7,
+        "name": "cat",
+        "price": 100000,
+        "department": "test subjects"
+    },
+    {
+        "id": 8,
+        "name": "human hand",
+        "price": 100000000,
+        "department": "test subjects"
+    },
+    {
+        "id": 9,
+        "name": "pickle",
+        "price": 10,
+        "department": "food"
+    },
+    {
+        "id": 10,
+        "name": "health potion",
+        "price": 150,
+        "department": "potion",
+    },
+    {
+        "id": 11
+        "name": "strength potion",
+        "price": 150,
+        "department": "potion",
+    },
+    {
+        "id": 12,
+        "name": "speed potion",
+        "price": 150,
+        "department": "potion"
     }
 ]
