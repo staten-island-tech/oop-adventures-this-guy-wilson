@@ -30,10 +30,11 @@ class Market:
             for i in item_data:
                 if item == i["name"]:
                     try:
-                        int(balance) - int(i[cost])
-                    except int(cost) > int(balance):
+                        int(balance) - int(i["price"])
+                    except int(i["price"]) > int(balance):
                         print("You cannot buy this item")
                     else:
+                        int(balance) -= int(i[price])
                         if item == "health potion":
                             Hero.health += 20
                         elif item == "speed potion":
@@ -42,10 +43,11 @@ class Market:
                             Hero.strength +=20
                         else:
                             Hero.inventory.append(item)
+                            print(f"{i["name"]} was purchased!")
                             return balance
                 else:
                     print("No item found.")
-            item = input("What would you like to buy?")
+            item = input("What else would you like to buy?")
 
 class Enemy:
     def __init__(self):
