@@ -2,7 +2,7 @@ import tkinter as tk
 import random
 
 class Hero:
-    def __init__(self, name, health, balance, inventory, stats, maxhealth, speed):
+    def __init__(self, name, health, balance, inventory, stats, maxhealth, speed, strength):
         self.name = name
         self.health = health
         self.balance = balance
@@ -10,6 +10,57 @@ class Hero:
         self.stats = stats
         self.maxhealth = maxhealth
         self.speed = speed
+        self.strength = strength
+
+store = [
+    {"name": "wooden armour",
+    "price": 10,
+    "department": "defense",},
+    
+    {"name": "steel armour",
+    "price": 50,
+    "department": "defense",},
+    
+    {"name": "diamond armour",
+    "price": 100,
+    "department": "defense"},
+
+    {"name": "wooden sword",
+    "price": 10,
+    "department": "offense",},
+
+    {"name": "steel sword",
+    "price": 50,
+    "department": "offense",},
+
+    {"name": "diamond sword",
+    "price": 100,
+    "department": "offense"},
+
+    {"name": "cat",
+    "price": 100000,
+    "department": "test subjects",},
+
+    {"name": "human hand",
+    "price": 100000000,
+    "department": "test subjects",},
+
+    {"name": "pickle",
+    "price": 10,
+    "department": "food"},
+
+    {"name": "health potion",
+    "price": 150,
+    "department": "potion",},
+
+    {"name": "strength potion",
+    "price": 150,
+    "department": "potion",},
+
+    {"name": "speed potion",
+    "price": 150,
+    "department": "potion"}
+]
 
 class Market:
     def __init__(self):
@@ -20,7 +71,7 @@ class Market:
     
     def buy(self, balance, cost, item, items):
         item = input("What would you like to buy?")
-        while item != "exit":
+        while (item != "exit") or (item != "end"):
             if item in items:
                 try:
                     int(balance) - int(cost)
@@ -29,6 +80,10 @@ class Market:
                 else:
                     if item == "health potion":
                         Hero.health += 20
+                    elif item == "speed potion":
+                        Hero.speed +=20
+                    elif item == "strength potion":
+                        Hero.strength +=20
                     else:
                         Hero.inventory.append(item)
                         return balance
@@ -37,13 +92,8 @@ class Market:
             item = input("What would you like to buy?")
 
 class Enemy:
-    def __init__(self, name, strength, health, attack, score, speed):
-        self.score = score
-        self.name = name
-        self.strength = strength
-        self.health = health
-        self.attack = attack
-        self.speed = speed
+    def __init__(self):
+        pass
     
     def battle_hill(self, enemyname, enemyhealth, baseattack, enemyscore, enemyspeed, attackname, attackpower):
         print(f"An {enemyname} has spawned!""\n")
@@ -63,6 +113,7 @@ class Enemy:
                         break
                     pass
                 elif hero_choice == "attack":
+                    enemyhealth -= Hero.health
                     pass
                 else:
                     pass
@@ -105,7 +156,7 @@ class Enemy:
         pass
 
     def death(self, loot):
-        print(f"The {Enemy.name} has been slained.")
+        print(f"The {Enemy.battle_hill.enemyname} has been slained.")
         print(f"{loot}""\n")
         heroinventoryamount = len(Hero.inventory)
         if heroinventoryamount <= 5:
@@ -141,57 +192,6 @@ class Event:
                 Enemy.battle_hill("Balrog", 1000, 100, 5000, 30, ("Fire Punch", "Rojogrund", "Hellblast", "Burnt Terrain"), (50, 100, 500, 20))
             elif randomeventmodifier == 100:
                 Enemy.battle_hill("Garry Kasparov", 2851, 285, 28510, 10, ("Check", "1996", "Kasparov's Immortal", "Rapid"), (100, Hero.maxhealth*0.1, 913, 10))
-        
-
-store = [
-    {"name": "wooden armour",
-    "price": 10,
-    "department": "defense",},
-    
-    {"name": "steel armour",
-    "price": 50,
-    "department": "defense",},
-    
-    {"name": "diamond armour",
-    "price": 100,
-    "department": "defense"},
-
-    {"name": "wooden sword",
-    "price": 10,
-    "department": "offense",},
-
-    {"name": "steel sword",
-    "price": 50,
-    "department": "offense",},
-
-    {"name": "diamond sword",
-    "price": 100,
-    "department": "offense"},
-
-    {"name": "cat",
-    "price": 100000,
-    "department": "animal",},
-
-    {"name": "human hand",
-    "price": 100000,
-    "department": "human",},
-
-    {"name": "pickle",
-    "price": 10,
-    "department": "food"},
-
-    {"name": "health potion",
-    "price": 150,
-    "department": "potion",},
-
-    {"name": "strength potion",
-    "price": 150,
-    "department": "potion",},
-
-    {"name": "speed potion",
-    "price": 150,
-    "department": "potion"}
-]
 
 charactername = input("Choose character name.""\n")
 
@@ -204,7 +204,7 @@ prompt = tk.Label(window, text="Character status",
 font=("Calibri", 28))
 prompt.pack(pady=20)
 
-Elias = Hero(f"{charactername}", 100, 1000, ["Stone Sword", "Wooden Shield"], 0, 100, 50)
+Elias = Hero(f"{charactername}", 100, 1000, ["Stone Sword", "Wooden Shield"], 0, 100, 50, 100)
 The_Market = Market()
 
 windowname = tk.Label(window, text=f"{Elias.name}", font=("Calibri", 30))
