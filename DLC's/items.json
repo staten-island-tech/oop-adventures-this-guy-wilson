@@ -1,0 +1,13 @@
+[{
+        "id": 1,
+        "name": "wooden armour",
+        "price": 10,
+        "department": "defense"
+    },
+    {
+        "id": 2,
+        "name": "steel armour",
+        "price": 50,
+        "department": "defense"
+    }
+]
