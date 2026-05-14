@@ -1,4 +1,4 @@
-### Use following code as an alternative if needed for the "enemy_attack" definition.\
+### Use following code as an alternative if needed for the "enemy_attack" definition.
 
 **Don't delete this file; is used for debug and fixation purposes.**
 
