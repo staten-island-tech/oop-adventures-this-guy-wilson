@@ -30,7 +30,7 @@ class Market:
             for i in item_data:
                 if item == i["name"]:
                     try:
-                        int(balance) - int(i["price"])
+                        balance - int(i["price"])
                     except int(i["price"]) > int(balance):
                         print("You cannot buy this item")
                     else:
