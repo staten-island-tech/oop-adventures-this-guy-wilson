@@ -1,5 +1,10 @@
 import tkinter as tk
 import random
+import json
+
+items = open("./items.json", encoding="utf8")
+item_data = json.load(items)
+
 
 class Hero:
     def __init__(self, name, health, balance, inventory, stats, maxhealth, speed, strength):
@@ -12,56 +17,6 @@ class Hero:
         self.speed = speed
         self.strength = strength
 
-store = [
-    {"name": "wooden armour",
-    "price": 10,
-    "department": "defense",},
-    
-    {"name": "steel armour",
-    "price": 50,
-    "department": "defense",},
-    
-    {"name": "diamond armour",
-    "price": 100,
-    "department": "defense"},
-
-    {"name": "wooden sword",
-    "price": 10,
-    "department": "offense",},
-
-    {"name": "steel sword",
-    "price": 50,
-    "department": "offense",},
-
-    {"name": "diamond sword",
-    "price": 100,
-    "department": "offense"},
-
-    {"name": "cat",
-    "price": 100000,
-    "department": "test subjects",},
-
-    {"name": "human hand",
-    "price": 100000000,
-    "department": "test subjects",},
-
-    {"name": "pickle",
-    "price": 10,
-    "department": "food"},
-
-    {"name": "health potion",
-    "price": 150,
-    "department": "potion",},
-
-    {"name": "strength potion",
-    "price": 150,
-    "department": "potion",},
-
-    {"name": "speed potion",
-    "price": 150,
-    "department": "potion"}
-]
-
 class Market:
     def __init__(self):
         pass
@@ -69,27 +24,30 @@ class Market:
     def check(self, market_items):
         print(market_items)
     
-    def buy(self, balance, cost, item, items):
+    def buy(self, balance):
         item = input("What would you like to buy?")
         while (item != "exit") or (item != "end"):
-            if item in items:
-                try:
-                    int(balance) - int(cost)
-                except int(cost) > int(balance):
-                    print("You cannot buy this item")
-                else:
-                    if item == "health potion":
-                        Hero.health += 20
-                    elif item == "speed potion":
-                        Hero.speed +=20
-                    elif item == "strength potion":
-                        Hero.strength +=20
+            for i in item_data:
+                if item == i["name"]:
+                    try:
+                        int(balance) - int(i["price"])
+                    except int(i["price"]) > int(balance):
+                        print("You cannot buy this item")
                     else:
-                        Hero.inventory.append(item)
-                        return balance
-            else:
-                print("No item found.")
-            item = input("What would you like to buy?")
+                        int(balance) -= int(i["price"])
+                        if item == "health potion":
+                            Hero.health += 20
+                        elif item == "speed potion":
+                            Hero.speed +=20
+                        elif item == "strength potion":
+                            Hero.strength +=20
+                        else:
+                            Hero.inventory.append(item)
+                            print(f"{i["name"]} was purchased!")
+                            return balance
+                else:
+                    print("No item found.")
+            item = input("What else would you like to buy?")
 
 class Enemy:
     def __init__(self):
