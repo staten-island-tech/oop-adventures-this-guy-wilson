@@ -53,11 +53,22 @@ class Enemy:
     def __init__(self):
         pass
     
+    def enemy_attack(self, name, baseattack, speed, attackname, power):
+        enemy_attack_choose = random.randint(0,4)
+        if enemy_attack_choose == 4:
+            print(f"The {name} uses the base attack.")
+            power = baseattack
+            Hero.health -= power
+        elif enemy_attack_choose == 3:
+            speed += power[enemy_attack_choose]
+        else:
+            print(f"The {name} uses {attackname[enemy_attack_choose]}.")
+            Hero.health -= power[enemy_attack_choose]
+
     def battle_hill(self, enemyname, enemyhealth, baseattack, enemyscore, enemyspeed, attackname, attackpower):
         print(f"An {enemyname} has spawned!""\n")
         print(f"Health:{enemyhealth}, Base Attack:{baseattack}")
-        while (enemyhealth > 0) or (Hero.health > 0):
-            enemy_attack_choose = random.randint(0,4)
+        while (enemyhealth > 0) or (Hero.health > 0):            
             if Hero.speed >= enemyspeed:
                 hero_choice = input("Select action")
                 if hero_choice == "potion":
@@ -75,25 +86,11 @@ class Enemy:
                     pass
                 else:
                     pass
-                if enemy_attack_choose == 4:
-                    print(f"The {enemyname} uses the base attack.")
-                    attackpower = baseattack
-                    Hero.health -= attackpower
-                elif enemy_attack_choose == 3:
-                    enemyspeed += attackpower[enemy_attack_choose]
-                else:
-                    print(f"The {enemyname} uses {attackname[enemy_attack_choose]}.")
-                    Hero.health -= attackpower[enemy_attack_choose]
+                Enemy.enemy_attack(enemyname, baseattack, enemyspeed, attackname, attackpower)
+                enemyspeed = Enemy.enemy_attack.speed
             else:
-                if enemy_attack_choose == 4:
-                    print(f"The {enemyname} uses the base attack.")
-                    attackpower = baseattack
-                    Hero.health -= attackpower
-                elif enemy_attack_choose == 3:
-                    enemyspeed += attackpower[enemy_attack_choose]
-                else:
-                    print(f"The {enemyname} uses {attackname[enemy_attack_choose]}.")
-                    Hero.health -= attackpower[enemy_attack_choose]
+                Enemy.enemy_attack(enemyname, baseattack, enemyspeed, attackname, attackpower)
+                enemyspeed = Enemy.enemy_attack.speed
                 hero_choice = input("Select action")
                 if hero_choice == "potion":
                     pass
