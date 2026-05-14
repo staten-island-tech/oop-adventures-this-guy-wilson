@@ -34,7 +34,7 @@ class Market:
                     except int(i["price"]) > int(balance):
                         print("You cannot buy this item")
                     else:
-                        int(balance) -= int(i[price])
+                        int(balance) -= int(i["price"])
                         if item == "health potion":
                             Hero.health += 20
                         elif item == "speed potion":

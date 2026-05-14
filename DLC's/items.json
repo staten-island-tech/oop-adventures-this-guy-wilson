@@ -20,13 +20,13 @@
         "id": 4,
         "name": "wooden sword",
         "price": 10,
-        "department": "offense",
+        "department": "offense"
     },
     {
         "id": 5,
         "name": "steel sword",
         "price": 50,
-        "department": "offense",
+        "department": "offense"
     },
     {
         "id": 6,
@@ -56,13 +56,13 @@
         "id": 10,
         "name": "health potion",
         "price": 150,
-        "department": "potion",
+        "department": "potion"
     },
     {
-        "id": 11
+        "id": 11,
         "name": "strength potion",
         "price": 150,
-        "department": "potion",
+        "department": "potion"
     },
     {
         "id": 12,
