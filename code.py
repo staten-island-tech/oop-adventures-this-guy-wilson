@@ -6,6 +6,8 @@ items = open("./items.json", encoding="utf8")
 item_data = json.load(items)
 
 
+Veliky_Tarnovo = False
+
 class Hero:
     def __init__(self, name, health, balance, inventory, stats, maxhealth, speed, strength):
         self.name = name
@@ -18,14 +20,14 @@ class Hero:
         self.strength = strength
 
 class Market:
-    def __init__(self):
-        pass
+    def __init__(self, inflation):
+        self.inflation = inflation
 
     def check(self, market_items):
         for e in market_items:
             print(e["name"])
     
-    def buy(self, balance):
+    def buy(self, balance, inflation):
         item = input("What would you like to buy in the Market?""\n")
         while (item != "exit") or (item != "end"):
             if item == "check":
@@ -33,13 +35,15 @@ class Market:
             else:
                 for i in item_data:
                     if item == i["name"]:
+                        Veliky_Tarnovo = True
                         print("Item Price:",int(i["price"]),"\n","Your balance:", balance, "\n")
+                        print("Inflation", inflation, "\n")
                         try:
-                            balance - int(i["price"])
-                        except int(i["price"]) > int(balance):
+                            balance - int(i["price"]*inflation)
+                        except int(inflation*i["price"]) > int(balance):
                             print("You cannot buy this item""\n")
                         else:
-                            balance -= int(i["price"])
+                            balance -= int(i["price"]*inflation)
                             if item == "health potion":
                                 Hero.health += 20
                             elif item == "speed potion":
@@ -50,8 +54,8 @@ class Market:
                                 Hero.inventory.append(item)
                                 print(f"{i["name"]} was purchased!""\n")
                                 return balance
-                    else:
-                        print("No item found.""\n")
+                if Veliky_Tarnovo == False:
+                    print("No item found.")
             item = input("What else would you like to do?")
 
 class Enemy:
@@ -134,12 +138,8 @@ class Event:
     def __init__(self):
         pass
 
-    def random_event_modifier(self, maxhealth, currenthealth):
+    def random_event_modifier(self):
         randomeventmodifier = random.randint(0,100)
-        if currenthealth < maxhealth:
-            currenthealth += (maxhealth*0.05)
-            if currenthealth > maxhealth:
-                currenthealth = maxhealth
         if randomeventmodifier >= 90:
             if (randomeventmodifier <= 91) and (randomeventmodifier <= 94):
                 Enemy.battle_hill("Goblin", 25, 5, 100, 25, ("Cut", "Treasure-Dive", "Lock", "Metronome"), (2, 6, 10, 5))
@@ -153,7 +153,6 @@ class Event:
                 Enemy.battle_hill("Balrog", 1000, 100, 5000, 30, ("Fire Punch", "Rojogrund", "Hellblast", "Burnt Terrain"), (50, 100, 500, 20))
             elif randomeventmodifier == 100:
                 Enemy.battle_hill("Garry Kasparov", 2851, 285, 28510, 10, ("Check", "1996", "Kasparov's Immortal", "Rapid"), (100, Hero.maxhealth*0.1, 913, 10))
-        return currenthealth
 
 charactername = input("Choose character name.""\n")
 
@@ -167,7 +166,7 @@ font=("Calibri", 28))
 prompt.pack(pady=20)
 
 Elias = Hero(f"{charactername}", 100, 1000, ["Stone Sword", "Wooden Shield"], 0, 100, 50, 100)
-Breunat = Market()
+Breunat = Market(1.00)
 Neuabgrund = Enemy()
 Abstreich = Event()
 
@@ -180,8 +179,12 @@ healthstatus.pack(pady=20)
 healthstatus.place(x=600, y=600)
 
 while Elias.health > 0:
-    Abstreich.random_event_modifier(Elias.maxhealth, Elias.health)
-    Breunat.buy(Elias.balance)
+    if Elias.health < Elias.maxhealth:
+        Elias.health += (Elias.maxhealth*0.05)
+    elif Elias.health > Elias.maxhealth:
+            Elias.health = Elias.maxhealth
+    Abstreich.random_event_modifier
+    Breunat.buy(Elias.balance, Breunat.inflation)
     pass
 print(Elias.name, "has died! Your final score is", Elias.stats)
 
