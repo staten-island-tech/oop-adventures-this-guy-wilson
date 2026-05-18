@@ -69,5 +69,35 @@
         "name": "speed potion",
         "price": 150,
         "department": "potion"
+    },
+    {
+        "id": 13,
+        "name": "pure dysentery",
+        "price": 150,
+        "department": "factors"
+    },
+    {
+        "id": 14,
+        "name": "ab dallah",
+        "price": 10,
+        "department": "attack"
+    },
+    {
+        "id": 15,
+        "name": "traxler countergambit",
+        "price": 100,
+        "department": "defense"
+    },
+    {
+        "id": 16,
+        "name": "axolotl shines upon your sins",
+        "price": 100000,
+        "department": "test subjects"
+    },
+    {
+        "id": 17,
+        "name": "the grass of the pitch",
+        "price": 1500,
+        "department": "factors"
     }
 ]
