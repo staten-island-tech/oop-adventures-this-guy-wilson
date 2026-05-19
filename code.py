@@ -133,7 +133,6 @@ class Enemy:
         else:
             print("Max inventory.")
         return
-
 class Event:
     def __init__(self):
         pass
