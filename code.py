@@ -27,11 +27,13 @@ class Market:
         for e in market_items:
             print(e["name"])
     
-    def buy(self, balance, inflation):
+    def buy(self, balance, inflation, inventory):
         item = input("What would you like to buy in the Market?""\n")
         while (item != "exit") or (item != "end"):
             if item == "check":
                Market.check(item_data)
+            elif item == "inventory":
+                print(inventory)
             else:
                 for i in item_data:
                     if item == i["name"]:
@@ -43,17 +45,22 @@ class Market:
                         except int(inflation*i["price"]) > int(balance):
                             print("You cannot buy this item""\n")
                         else:
-                            balance -= int(i["price"]*inflation)
-                            if item == "health potion":
-                                Hero.health += 20
-                            elif item == "speed potion":
-                                Hero.speed +=20
-                            elif item == "strength potion":
-                                Hero.strength +=20
+                            inventory_amount = len(inventory)
+                            if inventory_amount < 5:
+                                balance -= int(i["price"]*inflation)
+                                if item == "health potion":
+                                    Hero.health += 20
+                                elif item == "speed potion":
+                                    Hero.speed +=20
+                                elif item == "strength potion":
+                                    Hero.strength +=20
+                                else:
+                                    inventory.append(item)
+                                    print(f"{i["name"]} was purchased!""\n")
+                                    return balance
                             else:
-                                Hero.inventory.append(item)
-                                print(f"{i["name"]} was purchased!""\n")
-                                return balance
+                                print("You have too much items in your inventory.")
+                            return inventory
                 if Veliky_Tarnovo == False:
                     print("No item found.")
             item = input("What else would you like to do?")
@@ -172,11 +179,15 @@ Abstreich = Event()
 
 windowname = tk.Label(window, text=f"{Elias.name}", font=("Calibri", 30))
 windowname.pack(pady=20)
-windowname.place(x=200, y= 600)
+windowname.place(x=200, y=600)
 
 healthstatus = tk.Label(window, text=f"{Elias.health}/{Elias.maxhealth}", font=("Calibri", 30))
 healthstatus.pack(pady=20)
 healthstatus.place(x=600, y=600)
+
+inventorystatus = tk.Label(window, text=f"Inventory:{Elias.inventory}", font=("Calibri", 20))
+inventorystatus.pack(pady=10)
+inventorystatus.place(x=800, y=600)
 
 while Elias.health > 0:
     if Elias.health < Elias.maxhealth:
@@ -184,7 +195,7 @@ while Elias.health > 0:
     elif Elias.health > Elias.maxhealth:
             Elias.health = Elias.maxhealth
     Abstreich.random_event_modifier
-    Breunat.buy(Elias.balance, Breunat.inflation)
+    Breunat.buy(Elias.balance, Breunat.inflation, Elias.inventory)
     pass
 print(Elias.name, "has died! Your final score is", Elias.stats)
 
