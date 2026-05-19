@@ -69,5 +69,41 @@
         "name": "speed potion",
         "price": 150,
         "department": "potion"
+    },
+    {
+        "id": 13,
+        "name": "pure dysentery",
+        "price": 2000,
+        "department": "factors"
+    },
+    {
+        "id": 14,
+        "name": "ab dallah",
+        "price": 10,
+        "department": "attack"
+    },
+    {
+        "id": 15,
+        "name": "shaggy defense",
+        "price": 100,
+        "department": "defense"
+    },
+    {
+        "id": 16,
+        "name": "axolotl shines upon your sins",
+        "price": 100000,
+        "department": "test subjects"
+    },
+    {
+        "id": 17,
+        "name": "the grass of the pitch",
+        "price": 1000,
+        "department": "factors"
+    },
+    {
+        "id": 18,
+        "name": "stonebreak",
+        "price": 5000,
+        "department": "factors"
     }
 ]
