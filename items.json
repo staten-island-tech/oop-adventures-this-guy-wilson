@@ -73,7 +73,7 @@
     {
         "id": 13,
         "name": "pure dysentery",
-        "price": 150,
+        "price": 2000,
         "department": "factors"
     },
     {
@@ -84,7 +84,7 @@
     },
     {
         "id": 15,
-        "name": "traxler countergambit",
+        "name": "shaggy defense",
         "price": 100,
         "department": "defense"
     },
@@ -97,7 +97,13 @@
     {
         "id": 17,
         "name": "the grass of the pitch",
-        "price": 1500,
+        "price": 1000,
+        "department": "factors"
+    },
+    {
+        "id": 18,
+        "name": "stonebreak",
+        "price": 5000,
         "department": "factors"
     }
 ]
