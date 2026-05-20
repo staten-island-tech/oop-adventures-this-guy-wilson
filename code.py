@@ -81,7 +81,7 @@ class Enemy:
             print(f"The {name} uses {attackname[enemy_attack_choose]}.")
             Hero.health -= power[enemy_attack_choose]
     
-    def hero_attack(self, name, baseattack, speed, attackname, power):
+    def hero_attack(self, enemyscore, enemyhealth):
                 hero_choice = input("Select action")
                 if hero_choice == "potion":
                     pass
@@ -89,57 +89,28 @@ class Enemy:
                     pass
                 elif hero_choice == "flee":
                     flee = random.randint(0,10)
-                    if flee <= 1:
+                    if flee <= 2:
                         enemyscore = 0
-                        break
                     pass
                 elif hero_choice == "attack":
                     enemyhealth -= Hero.health
                     pass
                 else:
                     pass
+                return enemyscore, enemyhealth
 
     def battle_hill(self, enemyname, enemyhealth, baseattack, enemyscore, enemyspeed, attackname, attackpower):
         print(f"An {enemyname} has spawned!""\n")
         print(f"Health:{enemyhealth}, Base Attack:{baseattack}")
         while (enemyhealth > 0) or (Hero.health > 0):            
             if Hero.speed >= enemyspeed:
-                hero_choice = input("Select action")
-                if hero_choice == "potion":
-                    pass
-                elif hero_choice == "defense":
-                    pass
-                elif hero_choice == "flee":
-                    flee = random.randint(0,10)
-                    if flee <= 1:
-                        enemyscore = 0
-                        break
-                    pass
-                elif hero_choice == "attack":
-                    enemyhealth -= Hero.health
-                    pass
-                else:
-                    pass
+                Enemy.hero_attack(enemyscore, enemyhealth)
                 Enemy.enemy_attack(enemyname, baseattack, enemyspeed, attackname, attackpower)
                 enemyspeed = Enemy.enemy_attack.speed
             else:
                 Enemy.enemy_attack(enemyname, baseattack, enemyspeed, attackname, attackpower)
                 enemyspeed = Enemy.enemy_attack.speed
-                hero_choice = input("Select action")
-                if hero_choice == "potion":
-                    pass
-                elif hero_choice == "defense":
-                    pass
-                elif hero_choice == "flee":
-                    flee = random.randint(0,10)
-                    if flee <= 1:
-                        enemyscore = 0
-                        break
-                    pass
-                elif hero_choice == "attack":
-                    pass
-                else:
-                    pass
+                Enemy.hero_attack(enemyscore, enemyhealth)
         Enemy.death("Money", enemyname)
         Hero.stats += enemyscore
         pass
