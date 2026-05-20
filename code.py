@@ -84,7 +84,7 @@ class Enemy:
     def hero_attack(self, enemyscore, enemyhealth):
                 hero_choice = input("Select action")
                 if hero_choice == "potion":
-                    pass
+                    pass      
                 elif hero_choice == "defense":
                     pass
                 elif hero_choice == "flee":
