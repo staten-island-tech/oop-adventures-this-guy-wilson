@@ -32,7 +32,7 @@ class Market:
         while (item != "exit") or (item != "end"):
             if item == "check":
                Market.check(item_data)
-            elif item == "inventory":
+            elif item == "inventory":   
                 print(inventory)
             else:
                 for i in item_data:
@@ -80,12 +80,8 @@ class Enemy:
         else:
             print(f"The {name} uses {attackname[enemy_attack_choose]}.")
             Hero.health -= power[enemy_attack_choose]
-
-    def battle_hill(self, enemyname, enemyhealth, baseattack, enemyscore, enemyspeed, attackname, attackpower):
-        print(f"An {enemyname} has spawned!""\n")
-        print(f"Health:{enemyhealth}, Base Attack:{baseattack}")
-        while (enemyhealth > 0) or (Hero.health > 0):            
-            if Hero.speed >= enemyspeed:
+    
+    def hero_attack(self, enemyscore, enemyhealth):
                 hero_choice = input("Select action")
                 if hero_choice == "potion":
                     pass
@@ -93,35 +89,28 @@ class Enemy:
                     pass
                 elif hero_choice == "flee":
                     flee = random.randint(0,10)
-                    if flee <= 1:
+                    if flee <= 2:
                         enemyscore = 0
-                        break
                     pass
                 elif hero_choice == "attack":
                     enemyhealth -= Hero.health
                     pass
                 else:
                     pass
+                return enemyscore, enemyhealth
+
+    def battle_hill(self, enemyname, enemyhealth, baseattack, enemyscore, enemyspeed, attackname, attackpower):
+        print(f"An {enemyname} has spawned!""\n")
+        print(f"Health:{enemyhealth}, Base Attack:{baseattack}")
+        while (enemyhealth > 0) or (Hero.health > 0):            
+            if Hero.speed >= enemyspeed:
+                Enemy.hero_attack(enemyscore, enemyhealth)
                 Enemy.enemy_attack(enemyname, baseattack, enemyspeed, attackname, attackpower)
                 enemyspeed = Enemy.enemy_attack.speed
             else:
                 Enemy.enemy_attack(enemyname, baseattack, enemyspeed, attackname, attackpower)
                 enemyspeed = Enemy.enemy_attack.speed
-                hero_choice = input("Select action")
-                if hero_choice == "potion":
-                    pass
-                elif hero_choice == "defense":
-                    pass
-                elif hero_choice == "flee":
-                    flee = random.randint(0,10)
-                    if flee <= 1:
-                        enemyscore = 0
-                        break
-                    pass
-                elif hero_choice == "attack":
-                    pass
-                else:
-                    pass
+                Enemy.hero_attack(enemyscore, enemyhealth)
         Enemy.death("Money", enemyname)
         Hero.stats += enemyscore
         pass
@@ -140,7 +129,6 @@ class Enemy:
         else:
             print("Max inventory.")
         return
-
 class Event:
     def __init__(self):
         pass
@@ -190,6 +178,7 @@ inventorystatus.pack(pady=10)
 inventorystatus.place(x=800, y=600)
 
 while Elias.health > 0:
+    pass
     if Elias.health < Elias.maxhealth:
         Elias.health += (Elias.maxhealth*0.05)
     elif Elias.health > Elias.maxhealth:
