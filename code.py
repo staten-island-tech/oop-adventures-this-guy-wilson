@@ -32,7 +32,7 @@ class Market:
         while (item != "exit") or (item != "end"):
             if item == "check":
                Market.check(item_data)
-            elif item == "inventory":
+            elif item == "inventory":   
                 print(inventory)
             else:
                 for i in item_data:
@@ -80,6 +80,24 @@ class Enemy:
         else:
             print(f"The {name} uses {attackname[enemy_attack_choose]}.")
             Hero.health -= power[enemy_attack_choose]
+    
+    def hero_attack(self, name, baseattack, speed, attackname, power):
+                hero_choice = input("Select action")
+                if hero_choice == "potion":
+                    pass
+                elif hero_choice == "defense":
+                    pass
+                elif hero_choice == "flee":
+                    flee = random.randint(0,10)
+                    if flee <= 1:
+                        enemyscore = 0
+                        break
+                    pass
+                elif hero_choice == "attack":
+                    enemyhealth -= Hero.health
+                    pass
+                else:
+                    pass
 
     def battle_hill(self, enemyname, enemyhealth, baseattack, enemyscore, enemyspeed, attackname, attackpower):
         print(f"An {enemyname} has spawned!""\n")
@@ -189,6 +207,7 @@ inventorystatus.pack(pady=10)
 inventorystatus.place(x=800, y=600)
 
 while Elias.health > 0:
+    pass
     if Elias.health < Elias.maxhealth:
         Elias.health += (Elias.maxhealth*0.05)
     elif Elias.health > Elias.maxhealth:
