@@ -40,9 +40,7 @@ class Market:
                         Veliky_Tarnovo = True
                         print("Item Price:",int(i["price"]),"\n","Your balance:", balance, "\n")
                         print("Inflation", inflation, "\n")
-                        try:
-                            balance - int(i["price"]*inflation)
-                        except int(inflation*i["price"]) > int(balance):
+                        if int(inflation*i["price"]) > int(balance):
                             print("You cannot buy this item""\n")
                         else:
                             inventory_amount = len(inventory)
@@ -57,7 +55,8 @@ class Market:
                                 else:
                                     inventory.append(item)
                                     print(f"{i["name"]} was purchased!""\n")
-                                    return balance
+                                    Hero.inventory == inventory
+                                    Hero.balance == balance
                             else:
                                 print("You have too much items in your inventory.")
                             return inventory
