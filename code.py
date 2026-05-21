@@ -26,43 +26,42 @@ class Market:
     def check(self, market_items):
         for item in market_items:
             print(f"{item['name']} - Price: {item['price']}")
-            
-            def buy(self,balance, inventory):
-                items = {item["name"]: item for item in item_data}
-                while True:
-                    item = input("what would you like to buy from the market\n").lower()
-                    if item in ["exit", "end"]:
-                        break
-                    elif item == "check":
-                        self.check(item_data)
-                    elif item == "inventory":
-                        print(inventory)
-                    elif item in items:
-                        selected = items[item]
-                        final_price = int(selected["price"] * self.inflation)
+    def buy(self,balance, inventory):
+            items = {item["name"]: item for item in item_data}
+            while True:
+                item = input("what would you like to buy from the market\n").lower()
+                if item in ["exit", "end"]:
+                    break
+                elif item == "check":
+                    self.check(item_data)
+                elif item == "inventory":
+                    print(inventory)
+                elif item in items:
+                    selected = items[item]
+                    final_price = int(selected["price"] * self.inflation)
                         
-                        print(f"item price: {final_price}")
-                        print(f"your balance: {balance}")
-                        print(f"inflation: {self.inflation}\n")
-                        if final_price > balance:
-                            print("you dont have enough money.\n")
-                            continue
-                        if len(inventory) >= 5:
-                            print("Max inventory.\n")
-                            continue
-                        balance -= final_price
-                        if item == "health potion":
-                            Hero.health += 20
-                        elif item == "speed potion":
-                            Hero.speed += 20
-                        elif item == "strength potion":
-                            Hero.strength += 20
-                        else:
-                            inventory.append(item)
-                        print(f"{selected['name']} was bouht\n")
+                    print(f"item price: {final_price}")
+                    print(f"your balance: {balance}")
+                    print(f"inflation: {self.inflation}\n")
+                    if final_price > balance:
+                        print("you dont have enough money.\n")
+                        continue
+                    if len(inventory) >= 5:
+                        print("Max inventory.\n")
+                        continue
+                    balance -= final_price
+                    if item == "health potion":
+                        Hero.health += 20
+                    elif item == "speed potion":
+                        Hero.speed += 20
+                    elif item == "strength potion":
+                        Hero.strength += 20
                     else:
-                        print("no item is called that.\n")
-                return balance, inventory
+                        inventory.append(item)
+                    print(f"{selected['name']} was bouht\n")
+                else:
+                    print("no item is called that.\n")
+            return balance, inventory
                             
                         
 
@@ -186,7 +185,7 @@ while Elias.health > 0:
     elif Elias.health > Elias.maxhealth:
             Elias.health = Elias.maxhealth
     Abstreich.random_event_modifier
-    Breunat.buy(Elias.balance, Breunat.inflation, Elias.inventory)
+    Breunat.buy(Elias.balance, Elias.inventory)
     pass
 print(Elias.name, "has died! Your final score is", Elias.stats)
 
