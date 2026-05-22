@@ -5,9 +5,6 @@ import json
 items = open("./items.json", encoding="utf8")
 item_data = json.load(items)
 
-
-Veliky_Tarnovo = False
-
 class Hero:
     def __init__(self, name, health, balance, inventory, stats, maxhealth, speed, strength):
         self.name = name
@@ -19,52 +16,52 @@ class Hero:
         self.speed = speed
         self.strength = strength
 
+class Item:
+    def __init__(self):
+        pass
+
 class Market:
-    def __init__(self, inflation):
-        self.inflation = inflation
+    def __init__(self):
+        pass
+
+    def buy(self):
+        item = input("What would you like to buy in the Market?""\n")
+        while (item != "exit") or (item != "end"):
+            if item == "check":
+               Market.check(item_data)
+            elif item == "inventory":   
+                print(Hero.inventory)
+            elif item == "buy":
+                Market.cashier(Hero.balance)
+            item = input("What else would you like to do?")
 
     def check(self, market_items):
-        for item in market_items:
-            print(f"{item['name']} - Price: {item['price']}")
-    def buy(self,balance, inventory):
-            items = {item["name"]: item for item in item_data}
-            while True:
-                item = input("what would you like to buy from the market\n").lower()
-                if item in ["exit", "end"]:
-                    break
-                elif item == "check":
-                    self.check(item_data)
-                elif item == "inventory":
-                    print(inventory)
-                elif item in items:
-                    selected = items[item]
-                    final_price = int(selected["price"] * self.inflation)
-                        
-                    print(f"item price: {final_price}")
-                    print(f"your balance: {balance}")
-                    print(f"inflation: {self.inflation}\n")
-                    if final_price > balance:
-                        print("you dont have enough money.\n")
-                        continue
-                    if len(inventory) >= 5:
-                        print("Max inventory.\n")
-                        continue
-                    balance -= final_price
-                    if item == "health potion":
-                        Hero.health += 20
-                    elif item == "speed potion":
-                        Hero.speed += 20
-                    elif item == "strength potion":
-                        Hero.strength += 20
-                    else:
-                        inventory.append(item)
-                    print(f"{selected['name']} was bouht\n")
-                else:
-                    print("no item is called that.\n")
-            return balance, inventory
-                            
-                        
+        for e in market_items:
+            print(e["name"])
 
+    def cashier(balance):
+        sonion = input("What do you want to buy.")
+        for i in item_data:
+            if sonion == i["name"]:
+                print("Item Price:",int(i["price"]),"\n","Your balance:", balance, "\n")
+                if int(i["price"]) > int(balance):
+                    print("You cannot buy this item""\n")
+                else:
+                    inventory_amount = len(Hero.inventory)
+                    if inventory_amount < 5:
+                        balance -= int(i["price"])
+                        if sonion == "health potion":
+                            Hero.health += 20
+                        elif sonion == "speed potion":
+                            Hero.speed +=20
+                        elif sonion == "strength potion":
+                            Hero.strength +=20
+                        else:
+                            Hero.inventory.append(sonion["name"])
+                            print(f"{i["name"]} was purchased!""\n")
+                            Hero.balance == balance
+                    else:
+                        print("You have too much items in your inventory.")
 
 class Enemy:
     def __init__(self):
@@ -185,7 +182,7 @@ while Elias.health > 0:
     elif Elias.health > Elias.maxhealth:
             Elias.health = Elias.maxhealth
     Abstreich.random_event_modifier
-    Breunat.buy(Elias.balance, Elias.inventory)
+    Breunat.buy()
     pass
 print(Elias.name, "has died! Your final score is", Elias.stats)
 
