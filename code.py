@@ -175,6 +175,30 @@ inventorystatus = tk.Label(window, text=f"Inventory:{Elias.inventory}", font=("C
 inventorystatus.pack(pady=10)
 inventorystatus.place(x=800, y=600)
 
+def menu():
+    while Elias.health > 0:
+        print("\nPlease select an option\n""[1] Check current health\n""[2] Check current speed\n""[3] Check curret strength\n""[4] Open the market\n""[5] Check inventory\n""[6] Check balance\n""[7] Exit"
+        )
+        menu_input = input("What do you want to do")
+        if menu_input == "1":
+            print("current health is", Elias.health)
+        elif menu_input == "2":
+            print("current speed is", Elias.speed)
+        elif menu_input == "3":
+            print("current strength is", Elias.strength)
+        elif menu_input == "4":
+            print("Okay, browsing the market")
+            Breunat.buy()
+        elif menu_input == "5":
+            print("Inventory:", Elias.inventory)
+        elif menu_input == "6":
+            print("Balance:", Elias.balance)
+        elif menu_input == "7":
+            print("Exiting menu")
+            break
+        else:
+            print("Invalid try again")
+
 while Elias.health > 0:
     pass
     if Elias.health < Elias.maxhealth:
