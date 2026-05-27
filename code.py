@@ -199,15 +199,11 @@ def menu():
         else:
             print("Invalid try again")
 
-while Elias.health > 0:
-    pass
-    if Elias.health < Elias.maxhealth:
-        Elias.health += (Elias.maxhealth*0.05)
-    elif Elias.health > Elias.maxhealth:
-            Elias.health = Elias.maxhealth
-    Abstreich.random_event_modifier
-    Breunat.buy()
-    pass
-print(Elias.name, "has died! Your final score is", Elias.stats)
+        if Elias.health < Elias.maxhealth:
+            Elias.health +=(Elias.maxhealth * 0.05)
+            if Elias.health > Elias.maxhealth:
+                Elias.health = Elias.maxhealth
+
+
 
 window.mainloop()
