@@ -203,7 +203,14 @@ def menu():
             Elias.health +=(Elias.maxhealth * 0.05)
             if Elias.health > Elias.maxhealth:
                 Elias.health = Elias.maxhealth
+    windowname.config(
+        text = f"{Elias.name}")
+    healthstatus.config(
+        text = f"{int(Elias.health)}/{Elias.maxhealth}")
+    inventorystatus.config(
+        text = f"Inventory:{Elias.inventory}")
+    print(Elias.name, "has died. Your final score is", Elias.stats)
 
 
-
+menu()
 window.mainloop()
