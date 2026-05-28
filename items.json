@@ -105,5 +105,29 @@
         "name": "stonebreak",
         "price": 5000,
         "department": "factors"
+    },
+    {
+        "id": 19,
+        "name": "trance",
+        "price": 10000,
+        "department": "factors"
+    },
+    {
+        "id": 20,
+        "name": "luke zheng chess skills",
+        "price": 1,
+        "department": "attack"
+    },
+    {
+        "id": 21,
+        "name": "boyu's work rate",
+        "price": 10,
+        "department": "factors"
+    },
+    {
+        "id": 22,
+        "name": "tiki-taka",
+        "price": 1000,
+        "department": "defense"
     }
 ]
