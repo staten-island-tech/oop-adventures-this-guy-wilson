@@ -127,6 +127,7 @@ class Enemy:
         else:
             print("Max inventory.")
         return
+    
 class Event:
     def __init__(self):
         pass
@@ -181,17 +182,34 @@ while Elias.health > 0:
     elif Elias.health > Elias.maxhealth:
             Elias.health = Elias.maxhealth
     Abstreich.random_event_modifier
-        print("what do you want to do?""\n""[1] check current health""\n""[2] check current speed""\n""[3] check current strength""\n""[4] open the market")
-    menu_input = int(input("What do you want to do?"))
-    if menu_input == 1:
-        print(Hero.Health)
-    elif menu_input == 2:
-        print(Hero.Speed)
-    elif menu_input == 3:
-        print(Hero.Strength)
-    elif menu_input == 4:
+    print("\nPlease select an option\n""[1] Check current health\n""[2] Check current speed\n""[3] Check curret strength\n""[4] Open the market\n""[5] Check inventory\n""[6] Check balance\n""[7] Pass Turn"
+    )
+    menu_input = input("What do you want to do")
+    if menu_input == "1":
+        print("Current health is", Elias.health)
+    elif menu_input == "2":
+        print("Current speed is", Elias.speed)
+    elif menu_input == "3":
+        print("Current strength is", Elias.strength)
+    elif menu_input == "4":
         print("Okay, browsing the market")
-    pass
+        Breunat.buy()
+    elif menu_input == "5":
+        print("Inventory:", Elias.inventory)
+    elif menu_input == "6":
+        print("Balance:", Elias.balance)
+    elif menu_input == "7":
+        print("Exiting menu")
+        break
+    else:
+        print("Invalid try again")
+    
+    windowname.config(
+        text = f"{Elias.name}")
+    healthstatus.config(
+        text = f"{int(Elias.health)}/{Elias.maxhealth}")
+    inventorystatus.config(
+        text = f"Inventory:{Elias.inventory}")
 print(Elias.name, "has died! Your final score is", Elias.stats)
 
 window.mainloop()
