@@ -51,11 +51,15 @@ class Market:
                     if inventory_amount < 5:
                         balance -= int(i["price"])
                         if sonion == "health potion":
-                            Hero.health += 20
+                            Hero.health += 50
+                            if Hero.health > Hero.maxhealth:
+                                Hero.health = Hero.maxhealth
                         elif sonion == "speed potion":
                             Hero.speed +=20
                         elif sonion == "strength potion":
                             Hero.strength +=20
+                        elif sonion == "boost potion":
+                            Hero.maxhealth += 50
                         else:
                             Hero.inventory.append(sonion["name"])
                             print(f"{i["name"]} was purchased!""\n")
