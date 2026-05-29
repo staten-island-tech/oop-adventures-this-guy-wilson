@@ -129,5 +129,11 @@
         "name": "tiki-taka",
         "price": 1000,
         "department": "defense"
+    },
+    {
+        "id": 23,
+        "name": "boost potion",
+        "price": 500,
+        "department": "potion"
     }
 ]

@@ -166,11 +166,15 @@ class Market:
                     if inventory_amount < 5:
                         balance -= int(i["price"])
                         if sonion == "health potion":
-                            Hero.health += 20
+                            Hero.health += 50
+                            if Hero.health > Hero.maxhealth:
+                                Hero.health = Hero.maxhealth
                         elif sonion == "speed potion":
-                            Hero.speed +=20
+                            Hero.speed += 20
                         elif sonion == "strength potion":
-                            Hero.strength +=20
+                            Hero.strength += 20
+                        elif sonion == "boost potion":
+                            Hero.maxhealth += 50
                         else:
                             Hero.inventory.append(sonion["name"])
                             print(f"{i["name"]} was purchased!""\n")
@@ -263,7 +267,7 @@ class Event:
             elif randomeventmodifier == 100:
                 Enemy.battle_hill("Garry Kasparov", 2851, 285, 28510, 10, ("Check", "1996", "Kasparov's Immortal", "Rapid"), (100, Hero.maxhealth*0.1, 913, 10))
 
-charactername = input("Choose character name.""\n")
+charactername = input("Choose character name.\n")
 
 window = tk.Tk()
 window.title("OOP Adventures") 
@@ -275,7 +279,7 @@ font=("Calibri", 28))
 prompt.pack(pady=20)
 
 Elias = Hero(f"{charactername}", 100, 1000, ["Stone Sword", "Wooden Shield"], 0, 100, 50, 100)
-Breunat = Market(1.00)
+Breunat = Market()
 Neuabgrund = Enemy()
 Abstreich = Event()
 
@@ -297,27 +301,30 @@ while Elias.health > 0:
     elif Elias.health > Elias.maxhealth:
             Elias.health = Elias.maxhealth
     Abstreich.random_event_modifier
+
     print("\nPlease select an option\n""[1] Check current health\n""[2] Check current speed\n""[3] Check curret strength\n""[4] Open the market\n""[5] Check inventory\n""[6] Check balance\n""[7] Pass Turn"
     )
-    menu_input = input("What do you want to do")
-    if menu_input == "1":
-        print("Current health is", Elias.health)
-    elif menu_input == "2":
-        print("Current speed is", Elias.speed)
-    elif menu_input == "3":
-        print("Current strength is", Elias.strength)
-    elif menu_input == "4":
-        print("Okay, browsing the market")
-        Breunat.buy()
-    elif menu_input == "5":
-        print("Inventory:", Elias.inventory)
-    elif menu_input == "6":
-        print("Balance:", Elias.balance)
-    elif menu_input == "7":
-        print("Exiting menu")
-        break
-    else:
-        print("Invalid try again")
+    menu_input = input("Choose an action")
+    while menu_input != "7":
+        if menu_input == "1":
+            print("Current health is", Elias.health)
+        elif menu_input == "2":
+            print("Current speed is", Elias.speed)
+        elif menu_input == "3":
+            print("Current strength is", Elias.strength)
+        elif menu_input == "4":
+            print("Okay, browsing the market")
+            Breunat.buy()
+        elif menu_input == "5":
+            print("Inventory:", Elias.inventory)
+        elif menu_input == "6":
+            print("Balance:", Elias.balance)
+        else:
+            print("Invalid try again")
+        print("\nPlease select an option\n""[1] Check current health\n""[2] Check current speed\n""[3] Check curret strength\n""[4] Open the market\n""[5] Check inventory\n""[6] Check balance\n""[7] Pass Turn"
+        )
+        menu_input = input("What else do you want to do")
+    print("Simulating turn...")
     
     windowname.config(
         text = f"{Elias.name}")
