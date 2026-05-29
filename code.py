@@ -27,7 +27,7 @@ class Market:
     def buy_menu(self, hero):
         print("\nThis is the market")
         print("Type 'check' to see the items, 'buy' to purchase an item, 'inventory' to see your bag, or 'exit' to leave")
-        
+    
         choice = input("What would you like to do in the Market?""\n")
         while (choice != "exit") or (choice != "end"):
             if choice == "check":
@@ -275,10 +275,9 @@ font=("Calibri", 28))
 prompt.pack(pady=20)
 
 Elias = Hero(f"{charactername}", 100, 1000, ["Stone Sword", "Wooden Shield"], 0, 100, 50, 100)
-Breunat = Market(1.00)
+Breunat = Market()
 Neuabgrund = Enemy()
 Abstreich = Event()
-
 windowname = tk.Label(window, text=f"{Elias.name}", font=("Calibri", 30))
 windowname.pack(pady=20)
 windowname.place(x=200, y=600)
@@ -327,5 +326,6 @@ while Elias.health > 0:
         text = f"Inventory:{Elias.inventory}")
 print(Elias.name, "has died! Your final score is", Elias.stats)
 
-menu()
+
+
 window.mainloop()
