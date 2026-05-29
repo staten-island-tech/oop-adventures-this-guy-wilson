@@ -164,7 +164,7 @@ font=("Calibri", 28))
 prompt.pack(pady=20)
 
 Elias = Hero(f"{charactername}", 100, 1000, ["Stone Sword", "Wooden Shield"], 0, 100, 50, 100)
-Breunat = Market(1.00)
+Breunat = Market()
 Neuabgrund = Enemy()
 Abstreich = Event()
 
