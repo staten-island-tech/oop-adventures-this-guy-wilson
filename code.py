@@ -104,7 +104,7 @@ class Enemy:
     def battle_hill(self, enemyname, enemyhealth, baseattack, enemyscore, enemyspeed, attackname, attackpower):
         print(f"An {enemyname} has spawned!""\n")
         print(f"Health:{enemyhealth}, Base Attack:{baseattack}")
-        while (enemyhealth > 0) or (Hero.health > 0):            
+        while (enemyhealth > 0) and (Hero.health > 0):            
             if Hero.speed >= enemyspeed:
                 Enemy.hero_attack(enemyscore, enemyhealth)
                 Enemy.enemy_attack(enemyname, baseattack, enemyspeed, attackname, attackpower)
@@ -115,6 +115,8 @@ class Enemy:
                 Enemy.hero_attack(enemyscore, enemyhealth)
         Enemy.death("Money", enemyname)
         Hero.stats += enemyscore
+        Hero.balance += enemyscore
+        print(f"Your balance and score has increased by {enemyscore}!")
         pass
 
     def death(self, loot, name):
@@ -137,19 +139,19 @@ class Event:
         pass
 
     def random_event_modifier(self):
-        randomeventmodifier = random.randint(0,100)
-        if randomeventmodifier >= 90:
-            if (randomeventmodifier <= 91) and (randomeventmodifier <= 94):
+        randomeventmodifier = random.randint(0,1000)
+        if randomeventmodifier >= 900:
+            if (randomeventmodifier <= 900) and (randomeventmodifier <= 949):
                 Enemy.battle_hill("Goblin", 25, 5, 100, 25, ("Cut", "Treasure-Dive", "Lock", "Metronome"), (2, 6, 10, 5))
-            elif randomeventmodifier == (95 or 96):
+            elif (randomeventmodifier <= 950) and (randomeventmodifier <= 974):
                 Enemy.battle_hill("Vampire", 75, 10, 200, 40, ("Batwave", "Bite", "Bloodshear", "Floatation Dive"), (5, 10, 20, 5))
-            elif randomeventmodifier == 97:
+            elif (randomeventmodifier <= 975) and (randomeventmodifier <= 991):
                 Enemy.battle_hill("Witch", 150, 15, 500, 20, ("Staffswing", "Potions", "Blind Illusions", "Speed Potion"), (8, 15, 25, 10))
-            elif randomeventmodifier == 98:
+            elif (randomeventmodifier <= 992) and (randomeventmodifier <= 997):
                 Enemy.battle_hill("Regi", 500, 30, 2000, 20, ("Ice Shard", "Bulk Stomp", "Mirage Blast", "Weight Loss"), (15, 30, 50, 15))
-            elif randomeventmodifier == 99:
+            elif randomeventmodifier == (998 or 999):
                 Enemy.battle_hill("Balrog", 1000, 100, 5000, 30, ("Fire Punch", "Rojogrund", "Hellblast", "Burnt Terrain"), (50, 100, 500, 20))
-            elif randomeventmodifier == 100:
+            elif randomeventmodifier == 1000:
                 Enemy.battle_hill("Garry Kasparov", 2851, 285, 28510, 10, ("Check", "1996", "Kasparov's Immortal", "Rapid"), (100, Hero.maxhealth*0.1, 913, 10))
 
 charactername = input("Choose character name.\n")
