@@ -252,19 +252,18 @@ class Event:
         pass
 
     def random_event_modifier(self):
-        randomeventmodifier = random.randint(0,100)
-        if randomeventmodifier >= 90:
-            if (randomeventmodifier <= 91) and (randomeventmodifier <= 94):
+            roll = random.random()
+            if roll <= 0.20:
                 Enemy.battle_hill("Goblin", 25, 5, 100, 25, ("Cut", "Treasure-Dive", "Lock", "Metronome"), (2, 6, 10, 5))
-            elif randomeventmodifier == (95 or 96):
+            elif roll <= 0.05:
                 Enemy.battle_hill("Vampire", 75, 10, 200, 40, ("Batwave", "Bite", "Bloodshear", "Floatation Dive"), (5, 10, 20, 5))
-            elif randomeventmodifier == 97:
+            elif roll <= 0.01:
                 Enemy.battle_hill("Witch", 150, 15, 500, 20, ("Staffswing", "Potions", "Blind Illusions", "Speed Potion"), (8, 15, 25, 10))
-            elif randomeventmodifier == 98:
+            elif roll <= 0.001:
                 Enemy.battle_hill("Regi", 500, 30, 2000, 20, ("Ice Shard", "Bulk Stomp", "Mirage Blast", "Weight Loss"), (15, 30, 50, 15))
-            elif randomeventmodifier == 99:
+            elif roll <= 0.0001:
                 Enemy.battle_hill("Balrog", 1000, 100, 5000, 30, ("Fire Punch", "Rojogrund", "Hellblast", "Burnt Terrain"), (50, 100, 500, 20))
-            elif randomeventmodifier == 100:
+            elif roll <= 0.00001:
                 Enemy.battle_hill("Garry Kasparov", 2851, 285, 28510, 10, ("Check", "1996", "Kasparov's Immortal", "Rapid"), (100, Hero.maxhealth*0.1, 913, 10))
 
 charactername = input("Choose character name.\n")
