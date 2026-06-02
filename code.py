@@ -21,121 +21,6 @@ class Item:
         pass
 
 class Market:
-    def __init__(self, market_items):
-        self.market_items = market_items
-
-    def buy_menu(self, hero):
-        print("\nThis is the market")
-        print("Type 'check' to see the items, 'buy' to purchase an item, 'inventory' to see your bag, or 'exit' to leave")
-        
-        choice = input("What would you like to do in the Market?""\n")
-        while (choice != "exit") or (choice != "end"):
-            if choice == "check":
-               Market.check(item_data)
-            elif choice == "inventory":   
-                print(Hero.inventory)
-            elif choice == "buy":
-                Market.cashier(Hero.balance)
-            choice = input("What else would you like to do?")
-
-    def check(self, market_items):
-        for e in market_items:
-            print(e["name"])
-
-    def cashier(balance):
-        sonion = input("What do you want to buy.")
-        for i in item_data:
-            if sonion == i["name"]:
-                print("Item Price:",int(i["price"]),"\n","Your balance:", balance, "\n")
-                if int(i["price"]) > int(balance):
-                    print("You cannot buy this item""\n")
-                else:
-                    inventory_amount = len(Hero.inventory)
-                    if inventory_amount < 5:
-                        balance -= int(i["price"])
-                        if sonion == "health potion":
-                            Hero.health += 20
-                        elif sonion == "speed potion":
-                            Hero.speed +=20
-                        elif sonion == "strength potion":
-                            Hero.strength +=20
-                        else:
-                            Hero.inventory.append(sonion["name"])
-                            print(f"{i["name"]} was purchased!""\n")
-                            Hero.balance == balance
-                    else:
-                        print("You have too much items in your inventory.")
-
-class Enemy:
-    def __init__(self):
-        pass
-    
-    def enemy_attack(self, name, baseattack, speed, attackname, power):
-        enemy_attack_choose = random.randint(0,4)
-        if enemy_attack_choose == 4:
-            print(f"The {name} uses the base attack.")
-            power = baseattack
-            Hero.health -= power
-        elif enemy_attack_choose == 3:
-            speed += power[enemy_attack_choose]
-        else:
-            print(f"The {name} uses {attackname[enemy_attack_choose]}.")
-            Hero.health -= power[enemy_attack_choose]
-    
-    def hero_attack(self, enemyscore, enemyhealth):
-                hero_choice = input("Select action")
-                if hero_choice == "potion":
-                    pass      
-                elif hero_choice == "defense":
-                    pass
-                elif hero_choice == "flee":
-                    flee = random.randint(0,10)
-                    if flee <= 2:
-                        enemyscore = 0
-                    pass
-                elif hero_choice == "attack":
-                    enemyhealth -= Hero.health
-                    pass
-                else:
-                    pass
-                return enemyscore, enemyhealth
-
-    def battle_hill(self, enemyname, enemyhealth, baseattack, enemyscore, enemyspeed, attackname, attackpower):
-        print(f"An {enemyname} has spawned!""\n")
-        print(f"Health:{enemyhealth}, Base Attack:{baseattack}")
-        while (enemyhealth > 0) or (Hero.health > 0):            
-            if Hero.speed >= enemyspeed:
-                Enemy.hero_attack(enemyscore, enemyhealth)
-                Enemy.enemy_attack(enemyname, baseattack, enemyspeed, attackname, attackpower)
-                enemyspeed = Enemy.enemy_attack.speed
-            else:
-                Enemy.enemy_attack(enemyname, baseattack, enemyspeed, attackname, attackpower)
-                enemyspeed = Enemy.enemy_attack.speed
-                Enemy.hero_attack(enemyscore, enemyhealth)
-        Enemy.death("Money", enemyname)
-        Hero.stats += import tkinter as tk
-import random
-import json
-
-items = open("./items.json", encoding="utf8")
-item_data = json.load(items)
-
-class Hero:
-    def __init__(self, name, health, balance, inventory, stats, maxhealth, speed, strength):
-        self.name = name
-        self.health = health
-        self.balance = balance
-        self.inventory = inventory
-        self.stats = stats
-        self.maxhealth = maxhealth
-        self.speed = speed
-        self.strength = strength
-
-class Item:
-    def __init__(self):
-        pass
-
-class Market:
     def __init__(self):
         pass
 
@@ -199,22 +84,24 @@ class Enemy:
             Hero.health -= power[enemy_attack_choose]
     
     def hero_attack(self, enemyscore, enemyhealth):
-                hero_choice = input("Select action")
-                if hero_choice == "potion":
-                    pass      
-                elif hero_choice == "defense":
+        hero_choice = int(input("Select action"))
+        print("Select options\n""[1] - Attack\n""[2] - Inventory\n""[3] - Defend\n""[4] - Flee\n")
+        if hero_choice == 3:
+            pass
+        elif hero_choice == 4:
+            flee = random.randint(0,10)
+            if flee <= 1:
+                enemyscore = 0
+                enemyhealth = 0
+        elif hero_choice == 1:
+            enemyhealth -= Hero.strength
+        elif hero_choice == 2:
+            print(Hero.inventory)
+            item_usage = input("What item do you want to use?")
+            for usingsearch in Hero.inventory:
+                if usingsearch == item_usage:
                     pass
-                elif hero_choice == "flee":
-                    flee = random.randint(0,10)
-                    if flee <= 2:
-                        enemyscore = 0
-                    pass
-                elif hero_choice == "attack":
-                    enemyhealth -= Hero.health
-                    pass
-                else:
-                    pass
-                return enemyscore, enemyhealth
+        return enemyscore, enemyhealth
 
     def battle_hill(self, enemyname, enemyhealth, baseattack, enemyscore, enemyspeed, attackname, attackpower):
         print(f"An {enemyname} has spawned!""\n")
@@ -228,7 +115,7 @@ class Enemy:
                 Enemy.enemy_attack(enemyname, baseattack, enemyspeed, attackname, attackpower)
                 enemyspeed = Enemy.enemy_attack.speed
                 Enemy.hero_attack(enemyscore, enemyhealth)
-        if Hero.health <= 0:
+        if Enemy.health <= 0:
             Enemy.death("Money", enemyname)
             Hero.stats += enemyscore
             Hero.balance += enemyscore
@@ -281,11 +168,10 @@ prompt = tk.Label(window, text="Character status",
 font=("Calibri", 28))
 prompt.pack(pady=20)
 
-Elias = Hero(f"{charactername}", 100, 1000, ["Stone Sword", "Wooden Shield"], 0, 100, 50, 100)
+Elias = Hero(f"{charactername}", 100, 1000, ["Stone Sword", "Wooden Shield"], 0, 100, 50, 30)
 Breunat = Market()
 Neuabgrund = Enemy()
 Abstreich = Event()
-
 windowname = tk.Label(window, text=f"{Elias.name}", font=("Calibri", 30))
 windowname.pack(pady=20)
 windowname.place(x=200, y=600)
@@ -339,5 +225,6 @@ while Elias.health > 0:
 print(Elias.name, "has died! Your final score is", Elias.stats)
 print(f"Turns survived:{turns}")
 
-menu()
+
+
 window.mainloop()
