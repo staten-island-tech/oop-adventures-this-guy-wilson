@@ -113,11 +113,11 @@ class Enemy:
                 Enemy.enemy_attack(enemyname, baseattack, enemyspeed, attackname, attackpower)
                 enemyspeed = Enemy.enemy_attack.speed
                 Enemy.hero_attack(enemyscore, enemyhealth)
-        Enemy.death("Money", enemyname)
-        Hero.stats += enemyscore
-        Hero.balance += enemyscore
-        print(f"Your balance and score has increased by {enemyscore}!")
-        pass
+        if Hero.health <= 0:
+            Enemy.death("Money", enemyname)
+            Hero.stats += enemyscore
+            Hero.balance += enemyscore
+            print(f"Your balance and score has increased by {enemyscore}!")
 
     def death(self, loot, name):
         print("The",name,"has been slained.")
@@ -155,6 +155,7 @@ class Event:
                 Enemy.battle_hill("Garry Kasparov", 2851, 285, 28510, 10, ("Check", "1996", "Kasparov's Immortal", "Rapid"), (100, Hero.maxhealth*0.1, 913, 10))
 
 charactername = input("Choose character name.\n")
+turns = 0
 
 window = tk.Tk()
 window.title("OOP Adventures") 
@@ -212,6 +213,7 @@ while Elias.health > 0:
         )
         menu_input = input("What else do you want to do")
     print("Simulating turn...")
+    turns += 1
     
     windowname.config(
         text = f"{Elias.name}")
@@ -220,5 +222,6 @@ while Elias.health > 0:
     inventorystatus.config(
         text = f"Inventory:{Elias.inventory}")
 print(Elias.name, "has died! Your final score is", Elias.stats)
+print(f"Turns survived:{turns}")
 
 window.mainloop()
