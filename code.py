@@ -84,22 +84,24 @@ class Enemy:
             Hero.health -= power[enemy_attack_choose]
     
     def hero_attack(self, enemyscore, enemyhealth):
-                hero_choice = input("Select action")
-                if hero_choice == "potion":
+        hero_choice = int(input("Select action"))
+        print("Select options\n""[1] - Attack\n""[2] - Inventory\n""[3] - Defend\n""[4] - Flee\n")
+        if hero_choice == 3:
+            pass
+        elif hero_choice == 4:
+            flee = random.randint(0,10)
+            if flee <= 1:
+                enemyscore = 0
+                enemyhealth = 0
+        elif hero_choice == 1:
+            enemyhealth -= Hero.strength
+        elif hero_choice == 2:
+            print(Hero.inventory)
+            item_usage = input("What item do you want to use?")
+            for usingsearch in Hero.inventory:
+                if usingsearch == item_usage:
                     pass
-                elif hero_choice == "defense":
-                    pass
-                elif hero_choice == "flee":
-                    flee = random.randint(0,10)
-                    if flee <= 2:
-                        enemyscore = 0
-                    pass
-                elif hero_choice == "attack":
-                    enemyhealth -= Hero.health
-                    pass
-                else:
-                    pass
-                return enemyscore, enemyhealth
+        return enemyscore, enemyhealth
 
     def battle_hill(self, enemyname, enemyhealth, baseattack, enemyscore, enemyspeed, attackname, attackpower):
         print(f"An {enemyname} has spawned!""\n")
@@ -113,7 +115,7 @@ class Enemy:
                 Enemy.enemy_attack(enemyname, baseattack, enemyspeed, attackname, attackpower)
                 enemyspeed = Enemy.enemy_attack.speed
                 Enemy.hero_attack(enemyscore, enemyhealth)
-        if Hero.health <= 0:
+        if Enemy.health <= 0:
             Enemy.death("Money", enemyname)
             Hero.stats += enemyscore
             Hero.balance += enemyscore
@@ -166,7 +168,7 @@ prompt = tk.Label(window, text="Character status",
 font=("Calibri", 28))
 prompt.pack(pady=20)
 
-Elias = Hero(f"{charactername}", 100, 1000, ["Stone Sword", "Wooden Shield"], 0, 100, 50, 100)
+Elias = Hero(f"{charactername}", 100, 1000, ["Stone Sword", "Wooden Shield"], 0, 100, 50, 30)
 Breunat = Market()
 Neuabgrund = Enemy()
 Abstreich = Event()
