@@ -87,20 +87,34 @@ class Enemy:
         hero_choice = int(input("Select action"))
         print("Select options\n""[1] - Attack\n""[2] - Inventory\n""[3] - Defend\n""[4] - Flee\n")
         if hero_choice == 3:
-            pass
+            Hero.health += 20
         elif hero_choice == 4:
             flee = random.randint(0,10)
             if flee <= 1:
                 enemyscore = 0
                 enemyhealth = 0
+            else:
+                print("You failed to flee!")
         elif hero_choice == 1:
             enemyhealth -= Hero.strength
         elif hero_choice == 2:
             print(Hero.inventory)
+            inventory_usage = 0
             item_usage = input("What item do you want to use?")
-            for usingsearch in Hero.inventory:
-                if usingsearch == item_usage:
-                    pass
+            while inventory_usage != 1:
+                for usingsearch in Hero.inventory:
+                    if usingsearch == item_usage:
+                        for canikkarie in item_data:
+                            if canikkarie["name"] == item_usage:
+                                if canikkarie["department"] == "defense":
+                                    Hero.health += canikkarie["price"]
+                                    inventory_usage = 1
+                                elif canikkarie["department"] == "offense":
+                                    enemyhealth -= canikkarie["price"]
+                                    inventory_usage = 1
+                    else:
+                        print("Not found. Please try again.")
+                        item_usage = input("What item do you want to use?")
         return enemyscore, enemyhealth
 
     def battle_hill(self, enemyname, enemyhealth, baseattack, enemyscore, enemyspeed, attackname, attackpower):
@@ -134,7 +148,8 @@ class Enemy:
                     print("Invalid")
         else:
             print("Max inventory.")
-        return
+        Hero.strength = (Hero.strength*1.1)
+
     
 class Event:
     def __init__(self):
@@ -168,7 +183,7 @@ prompt = tk.Label(window, text="Character status",
 font=("Calibri", 28))
 prompt.pack(pady=20)
 
-Elias = Hero(f"{charactername}", 100, 1000, ["Stone Sword", "Wooden Shield"], 0, 100, 50, 30)
+Elias = Hero(f"{charactername}", 100, 1000, ["wooden armor", "wooden sword"], 0, 100, 50, 30)
 Breunat = Market()
 Neuabgrund = Enemy()
 Abstreich = Event()
