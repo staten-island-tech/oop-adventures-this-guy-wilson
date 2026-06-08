@@ -165,11 +165,11 @@ class Event:
             elif (randomeventmodifier <= 975) and (randomeventmodifier <= 991):
                 Enemy.battle_hill("Witch", 150, 15, 500, 20, ("Staffswing", "Potions", "Blind Illusions", "Speed Potion"), (8, 15, 25, 10))
             elif (randomeventmodifier <= 992) and (randomeventmodifier <= 997):
-                Enemy.battle_hill("Regi", 500, 30, 2000, 20, ("Ice Shard", "Bulk Stomp", "Mirage Blast", "Weight Loss"), (15, 30, 50, 15))
+                Enemy.battle_hill("Regi", 550, 50, 2000, 20, ("Ice Shard", "Bulk Stomp", "Mirage Blast", "Weight Loss"), (15, 30, 50, 15))
             elif randomeventmodifier == (998 or 999):
-                Enemy.battle_hill("Balrog", 1000, 100, 5000, 30, ("Fire Punch", "Rojogrund", "Hellblast", "Burnt Terrain"), (50, 100, 500, 20))
+                Enemy.battle_hill("Balrog", 2500, 150, 5000, 30, ("Fire Punch", "Rojogrund", "Hellblast", "Burnt Terrain"), (50, 100, 500, 20))
             elif randomeventmodifier == 1000:
-                Enemy.battle_hill("Garry Kasparov", 2851, 285, 28510, 10, ("Check", "1996", "Kasparov's Immortal", "Rapid"), (100, Hero.maxhealth*0.1, 913, 10))
+                Enemy.battle_hill("Garry Kasparov", 28510, 800, 28510, 10, ("Check", "1996", "Kasparov's Immortal", "Rapid"), (100, Hero.maxhealth*0.1, 913, 10))
 
 charactername = input("Choose character name.\n")
 turns = 0

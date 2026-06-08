@@ -135,5 +135,11 @@
         "name": "boost potion",
         "price": 500,
         "department": "potion"
+    },
+    {
+        "id": 24,
+        "name": "world cup trophy",
+        "price": 100000,
+        "department": "attack"
     }
 ]
