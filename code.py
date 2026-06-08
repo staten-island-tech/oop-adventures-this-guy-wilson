@@ -87,7 +87,7 @@ class Enemy:
         hero_choice = int(input("Select action"))
         print("Select options\n""[1] - Attack\n""[2] - Inventory\n""[3] - Defend\n""[4] - Flee\n")
         if hero_choice == 3:
-            Hero.health += 20
+            Hero.health += 20 
         elif hero_choice == 4:
             flee = random.randint(0,10)
             if flee <= 1:
