@@ -69,9 +69,14 @@ class Market:
 
 class Enemy:
     def __init__(self):
-        pass
+        self.defend = False
     
     def enemy_attack(self, name, baseattack, speed, attackname, power):
+        if self.defend == True:
+            print("You defended so the enemey did no damage")
+            self.defend = False
+            return
+        
         enemy_attack_choose = random.randint(0,4)
         if enemy_attack_choose == 4:
             print(f"The {name} uses the base attack.")
@@ -87,7 +92,8 @@ class Enemy:
         hero_choice = int(input("Select action"))
         print("Select options\n""[1] - Attack\n""[2] - Inventory\n""[3] - Defend\n""[4] - Flee\n")
         if hero_choice == 3:
-            Hero.health -= 0
+            self.defend == True
+            print("You have defended and took no damage.")
         elif hero_choice == 4:
             flee = random.randint(0,10)
             if flee <= 1:
