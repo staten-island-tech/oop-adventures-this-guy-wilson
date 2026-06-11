@@ -5,6 +5,8 @@ import json
 items = open("./items.json", encoding="utf8")
 item_data = json.load(items)
 
+defense = 0
+
 class Hero:
     def __init__(self, name, health, balance, inventory, stats, maxhealth, speed, strength):
         self.name = name
@@ -81,19 +83,28 @@ class Enemy:
         if enemy_attack_choose == 4:
             print(f"The {name} uses the base attack.")
             power = baseattack
-            Hero.health -= power
+            defense -= power
+            if defense <= 0:
+                Hero.health += defense
+                defense = 0
+            else:
+                print("Successful defense.")
         elif enemy_attack_choose == 3:
             speed += power[enemy_attack_choose]
         else:
-            print(f"The {name} uses {attackname[enemy_attack_choose]}.")
-            Hero.health -= power[enemy_attack_choose]
+            print(f"The {name} uses {enemy_attack_choose[attackname]}.")
+            defense -= enemy_attack_choose[power]
+            if defense <= 0:
+                Hero.health += defense
+                defense = 0
+            else:
+                print("Congratulations!")
     
     def hero_attack(self, enemyscore, enemyhealth):
         hero_choice = int(input("Select action"))
         print("Select options\n""[1] - Attack\n""[2] - Inventory\n""[3] - Defend\n""[4] - Flee\n")
         if hero_choice == 3:
-            self.defend == True
-            print("You have defended and took no damage.")
+            defense += 20
         elif hero_choice == 4:
             flee = random.randint(0,10)
             if flee <= 1:
@@ -135,6 +146,7 @@ class Enemy:
                 Enemy.enemy_attack(enemyname, baseattack, enemyspeed, attackname, attackpower)
                 enemyspeed = Enemy.enemy_attack.speed
                 Enemy.hero_attack(enemyscore, enemyhealth)
+            print(f"Your health:{Hero.health}")
         if Enemy.health <= 0:
             Enemy.death("Money", enemyname)
             Hero.stats += enemyscore
@@ -171,11 +183,11 @@ class Event:
             elif (randomeventmodifier <= 975) and (randomeventmodifier <= 991):
                 Enemy.battle_hill("Witch", 150, 15, 500, 20, ("Staffswing", "Potions", "Blind Illusions", "Speed Potion"), (8, 15, 25, 10))
             elif (randomeventmodifier <= 992) and (randomeventmodifier <= 997):
-                Enemy.battle_hill("Regi", 500, 30, 2000, 20, ("Ice Shard", "Bulk Stomp", "Mirage Blast", "Weight Loss"), (15, 30, 50, 15))
+                Enemy.battle_hill("Regi", 550, 50, 2000, 20, ("Ice Shard", "Bulk Stomp", "Mirage Blast", "Weight Loss"), (15, 30, 50, 15))
             elif randomeventmodifier == (998 or 999):
-                Enemy.battle_hill("Balrog", 1000, 100, 5000, 30, ("Fire Punch", "Rojogrund", "Hellblast", "Burnt Terrain"), (50, 100, 500, 20))
+                Enemy.battle_hill("Balrog", 2500, 150, 5000, 30, ("Fire Punch", "Rojogrund", "Hellblast", "Burnt Terrain"), (50, 100, 500, 20))
             elif randomeventmodifier == 1000:
-                Enemy.battle_hill("Garry Kasparov", 2851, 285, 28510, 10, ("Check", "1996", "Kasparov's Immortal", "Rapid"), (100, Hero.maxhealth*0.1, 913, 10))
+                Enemy.battle_hill("Garry Kasparov", 28510, 800, 28510, 10, ("Check", "1996", "Kasparov's Immortal", "Rapid"), (100, Hero.maxhealth*0.1, 913, 10))
 
 charactername = input("Choose character name.\n")
 turns = 0
