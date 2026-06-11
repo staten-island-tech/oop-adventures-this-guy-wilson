@@ -131,7 +131,7 @@ class Enemy:
 
     def battle_hill(self, enemyname, enemyhealth, baseattack, enemyscore, enemyspeed, attackname, attackpower):
         print(f"An {enemyname} has spawned!""\n")
-        print(f"Health:{enemyhealth}, Base Attack:{baseattack}")
+        print(f"Health:{enemyhealth}, Base A-6ttack:{baseattack}")
         while (enemyhealth > 0) and (Hero.health > 0):            
             if Hero.speed >= enemyspeed:
                 Enemy.hero_attack(enemyscore, enemyhealth)
@@ -250,7 +250,7 @@ while Elias.health > 0:
         text = f"{int(Elias.health)}/{Elias.maxhealth}")
     inventorystatus.config(
         text = f"Inventory:{Elias.inventory}")
-print(Elias.name, "has died! Your final score is", Elias.stats)
+print(f"{Elias.name} has died! Your final score is {Elias.stats}")
 print(f"Turns survived:{turns}")
 
 
