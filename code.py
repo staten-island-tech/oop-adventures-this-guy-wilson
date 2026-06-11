@@ -71,14 +71,9 @@ class Market:
 
 class Enemy:
     def __init__(self):
-        self.defend = False
+        pass
     
     def enemy_attack(self, name, baseattack, speed, attackname, power):
-        if self.defend == True:
-            print("You defended so the enemey did no damage")
-            self.defend = False
-            return
-        
         enemy_attack_choose = random.randint(0,4)
         if enemy_attack_choose == 4:
             print(f"The {name} uses the base attack.")
@@ -255,7 +250,7 @@ while Elias.health > 0:
         text = f"{int(Elias.health)}/{Elias.maxhealth}")
     inventorystatus.config(
         text = f"Inventory:{Elias.inventory}")
-print(Elias.name, "has died! Your final score is", Elias.stats)
+print(f"{Elias.name} has died! Your final score is {Elias.stats}")
 print(f"Turns survived:{turns}")
 
 
