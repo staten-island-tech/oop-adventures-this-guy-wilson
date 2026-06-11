@@ -5,6 +5,8 @@ import json
 items = open("./items.json", encoding="utf8")
 item_data = json.load(items)
 
+defense = 0
+
 class Hero:
     def __init__(self, name, health, balance, inventory, stats, maxhealth, speed, strength):
         self.name = name
@@ -76,18 +78,28 @@ class Enemy:
         if enemy_attack_choose == 4:
             print(f"The {name} uses the base attack.")
             power = baseattack
-            Hero.health -= power
+            defense -= power
+            if defense <= 0:
+                Hero.health += defense
+                defense = 0
+            else:
+                print("Successful defense.")
         elif enemy_attack_choose == 3:
             speed += power[enemy_attack_choose]
         else:
-            print(f"The {name} uses {attackname[enemy_attack_choose]}.")
-            Hero.health -= power[enemy_attack_choose]
+            print(f"The {name} uses {enemy_attack_choose[attackname]}.")
+            defense -= enemy_attack_choose[power]
+            if defense <= 0:
+                Hero.health += defense
+                defense = 0
+            else:
+                print("Congratulations!")
     
     def hero_attack(self, enemyscore, enemyhealth):
         hero_choice = int(input("Select action"))
         print("Select options\n""[1] - Attack\n""[2] - Inventory\n""[3] - Defend\n""[4] - Flee\n")
         if hero_choice == 3:
-            Hero.health += 20
+            defense += 20
         elif hero_choice == 4:
             flee = random.randint(0,10)
             if flee <= 1:
@@ -129,6 +141,7 @@ class Enemy:
                 Enemy.enemy_attack(enemyname, baseattack, enemyspeed, attackname, attackpower)
                 enemyspeed = Enemy.enemy_attack.speed
                 Enemy.hero_attack(enemyscore, enemyhealth)
+            print(f"Your health:{Hero.health}")
         if Enemy.health <= 0:
             Enemy.death("Money", enemyname)
             Hero.stats += enemyscore
