@@ -71,9 +71,14 @@ class Market:
 
 class Enemy:
     def __init__(self):
-        pass
+        self.defend = False
     
     def enemy_attack(self, name, baseattack, speed, attackname, power):
+        if self.defend == True:
+            print("You defended so the enemey did no damage")
+            self.defend = False
+            return
+        
         enemy_attack_choose = random.randint(0,4)
         if enemy_attack_choose == 4:
             print(f"The {name} uses the base attack.")
@@ -131,7 +136,7 @@ class Enemy:
 
     def battle_hill(self, enemyname, enemyhealth, baseattack, enemyscore, enemyspeed, attackname, attackpower):
         print(f"An {enemyname} has spawned!""\n")
-        print(f"Health:{enemyhealth}, Base Attack:{baseattack}")
+        print(f"Health:{enemyhealth}, Base A-6ttack:{baseattack}")
         while (enemyhealth > 0) and (Hero.health > 0):            
             if Hero.speed >= enemyspeed:
                 Enemy.hero_attack(enemyscore, enemyhealth)
