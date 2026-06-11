@@ -240,7 +240,7 @@ while Elias.health > 0:
             print("Invalid try again")
         print("\nPlease select an option\n""[1] Check current health\n""[2] Check current speed\n""[3] Check curret strength\n""[4] Open the market\n""[5] Check inventory\n""[6] Check balance\n""[7] Pass Turn"
         )
-        menu_input = input("What else do you want to do")
+        menu_input = input("What else do you want to do?")
     print("Simulating turn...")
     turns += 1
     
