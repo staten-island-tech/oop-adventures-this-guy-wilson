@@ -41,7 +41,7 @@ class Market:
         for e in market_items:
             print(e["name"])
 
-    def cashier(balance):
+    def cashier(self, balance):
         sonion = input("What do you want to buy?")
         for i in item_data:
             if sonion == i["name"]:
