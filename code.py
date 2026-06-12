@@ -248,7 +248,7 @@ while Elias.health > 0:
     windowname.config(
         text = f"{Elias.name}")
     healthstatus.config(
-        text = f"Health: {int(Elias.health)}/{Elias.maxhealth}")
+        text = f"{int(Elias.health)}/{Elias.maxhealth}")
     inventorystatus.config(
         text = f"Inventory:{Elias.inventory}")
 print(f"{Elias.name} has died! Your final score is {Elias.stats}")
