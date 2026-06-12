@@ -41,7 +41,7 @@ class Market:
         for e in market_items:
             print(e["name"])
 
-    def cashier(balance):
+    def cashier(self, balance):
         sonion = input("What do you want to buy?")
         for i in item_data:
             if sonion == i["name"]:
@@ -162,7 +162,7 @@ class Enemy:
                     print("Invalid")
         else:
             print("Max inventory.")
-        Hero.strength = (Hero.strength*1.1)
+        Hero.strength = round(Hero.strength*1.1, 2)
 
     
 class Event:
@@ -217,7 +217,9 @@ while Elias.health > 0:
         Elias.health += (Elias.maxhealth*0.05)
     elif Elias.health > Elias.maxhealth:
             Elias.health = Elias.maxhealth
-    
+            randomeventmodifier = random.randint(0,1000)
+    round(Elias.health, 2)
+
     enemychance = random.randint(0,1000)
     Abstreich.random_event_modifier(enemychance)
 
@@ -238,11 +240,13 @@ while Elias.health > 0:
             print("Inventory:", Elias.inventory)
         elif menu_input == "6":
             print("Balance:", Elias.balance)
+        elif menu_input == "its time to roast":
+            Elias.balance += 100000
         else:
             print("Invalid try again")
         print("\nPlease select an option\n""[1] Check current health\n""[2] Check current speed\n""[3] Check curret strength\n""[4] Open the market\n""[5] Check inventory\n""[6] Check balance\n""[7] Pass Turn"
         )
-        menu_input = input("What else do you want to do?")
+        menu_input = input("What else do you want to do?\n")
     print("Simulating turn...")
     turns += 1
     
