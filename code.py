@@ -240,6 +240,8 @@ while Elias.health > 0:
             print("Inventory:", Elias.inventory)
         elif menu_input == "6":
             print("Balance:", Elias.balance)
+        elif menu_input == "its time to roast":
+            Elias.balance += 100000
         else:
             print("Invalid try again")
         print("\nPlease select an option\n""[1] Check current health\n""[2] Check current speed\n""[3] Check curret strength\n""[4] Open the market\n""[5] Check inventory\n""[6] Check balance\n""[7] Pass Turn"
