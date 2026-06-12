@@ -162,7 +162,7 @@ class Enemy:
                     print("Invalid")
         else:
             print("Max inventory.")
-        Hero.strength = (Hero.strength*1.1)
+        Hero.strength = round(Hero.strength*1.1, 2)
 
     
 class Event:
@@ -217,7 +217,9 @@ while Elias.health > 0:
         Elias.health += (Elias.maxhealth*0.05)
     elif Elias.health > Elias.maxhealth:
             Elias.health = Elias.maxhealth
-    
+            randomeventmodifier = random.randint(0,1000)
+    round(Elias.health, 2)
+
     enemychance = random.randint(0,1000)
     Abstreich.random_event_modifier(enemychance)
 
