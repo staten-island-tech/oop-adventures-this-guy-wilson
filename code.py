@@ -169,8 +169,7 @@ class Event:
     def __init__(self):
         pass
 
-    def random_event_modifier(self):
-        randomeventmodifier = random.randint(0,1000)
+    def random_event_modifier(self, randomeventmodifier):
         if randomeventmodifier >= 900:
             if (randomeventmodifier <= 900) and (randomeventmodifier <= 949):
                 Enemy.battle_hill("Goblin", 25, 5, 100, 25, ("Cut", "Treasure-Dive", "Lock", "Metronome"), (2, 6, 10, 5))
@@ -218,7 +217,9 @@ while Elias.health > 0:
         Elias.health += (Elias.maxhealth*0.05)
     elif Elias.health > Elias.maxhealth:
             Elias.health = Elias.maxhealth
-    Abstreich.random_event_modifier
+    
+    enemychance = random.randint(0,1000)
+    Abstreich.random_event_modifier(enemychance)
 
     print("\nPlease select an option\n""[1] Check current health\n""[2] Check current speed\n""[3] Check curret strength\n""[4] Open the market\n""[5] Check inventory\n""[6] Check balance\n""[7] Pass Turn"
     )
