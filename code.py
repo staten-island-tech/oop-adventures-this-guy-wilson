@@ -142,6 +142,7 @@ class Enemy:
                 enemyspeed = Enemy.enemy_attack.speed
                 Enemy.hero_attack(enemyscore, enemyhealth)
             print(f"Your health:{Hero.health}")
+            print(f"Enemy health:{enemyhealth}")
         if Enemy.health <= 0:
             Enemy.death("Money", enemyname)
             Hero.stats += enemyscore
@@ -210,7 +211,7 @@ healthstatus.place(x=600, y=600)
 
 inventorystatus = tk.Label(window, text=f"Inventory:{Elias.inventory}", font=("Calibri", 20))
 inventorystatus.pack(pady=10)
-inventorystatus.place(x=800, y=600)
+inventorystatus.place(x=100, y=300)
 
 while Elias.health > 0:
     if Elias.health < Elias.maxhealth:
@@ -221,7 +222,7 @@ while Elias.health > 0:
 
     print("\nPlease select an option\n""[1] Check current health\n""[2] Check current speed\n""[3] Check curret strength\n""[4] Open the market\n""[5] Check inventory\n""[6] Check balance\n""[7] Pass Turn"
     )
-    menu_input = input("Choose an action")
+    menu_input = input("Choose an action\n")
     while menu_input != "7":
         if menu_input == "1":
             print("Current health is", Elias.health)
@@ -247,7 +248,7 @@ while Elias.health > 0:
     windowname.config(
         text = f"{Elias.name}")
     healthstatus.config(
-        text = f"{int(Elias.health)}/{Elias.maxhealth}")
+        text = f"Health: {int(Elias.health)}/{Elias.maxhealth}")
     inventorystatus.config(
         text = f"Inventory:{Elias.inventory}")
 print(f"{Elias.name} has died! Your final score is {Elias.stats}")
