@@ -27,7 +27,7 @@ class Market:
         pass
 
     def buy(self):
-        item = input("What would you like to buy in the Market?""\n")
+        item = input("What would you like to do in the Market?""\n")
         while (item != "exit") or (item != "end"):
             if item == "check":
                Market.check(item_data)
@@ -42,7 +42,7 @@ class Market:
             print(e["name"])
 
     def cashier(balance):
-        sonion = input("What do you want to buy.")
+        sonion = input("What do you want to buy?")
         for i in item_data:
             if sonion == i["name"]:
                 print("Item Price:",int(i["price"]),"\n","Your balance:", balance, "\n")
@@ -240,7 +240,7 @@ while Elias.health > 0:
             print("Invalid try again")
         print("\nPlease select an option\n""[1] Check current health\n""[2] Check current speed\n""[3] Check curret strength\n""[4] Open the market\n""[5] Check inventory\n""[6] Check balance\n""[7] Pass Turn"
         )
-        menu_input = input("What else do you want to do")
+        menu_input = input("What else do you want to do?")
     print("Simulating turn...")
     turns += 1
     
