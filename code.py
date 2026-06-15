@@ -69,33 +69,36 @@ class Market:
                     else:
                         print("You have too much items in your inventory.")
 
+4
 class Enemy:
     def __init__(self):
         pass
     
     def enemy_attack(self, name, baseattack, speed, attackname, power):
+        global defense
         enemy_attack_choose = random.randint(0,4)
         if enemy_attack_choose == 4:
             print(f"The {name} uses the base attack.")
             power = baseattack
             defense -= power
             if defense <= 0:
-                Hero.health += defense
+                Elias.health += defense
                 defense = 0
             else:
                 print("Successful defense.")
         elif enemy_attack_choose == 3:
             speed += power[enemy_attack_choose]
         else:
-            print(f"The {name} uses {enemy_attack_choose[attackname]}.")
-            defense -= enemy_attack_choose[power]
+            print(f"The {name} uses {attackname[enemy_attack_choose]}.")
+            defense -= power[enemy_attack_choose]
             if defense <= 0:
-                Hero.health += defense
+                Elias.health += defense
                 defense = 0
             else:
                 print("Congratulations!")
     
     def hero_attack(self, enemyscore, enemyhealth):
+        global defense
         hero_choice = int(input("Select action"))
         print("Select options\n""[1] - Attack\n""[2] - Inventory\n""[3] - Defend\n""[4] - Flee\n")
         if hero_choice == 3:
@@ -108,22 +111,21 @@ class Enemy:
             else:
                 print("You failed to flee!")
         elif hero_choice == 1:
-            enemyhealth -= Hero.strength
+            enemyhealth -= Elias.strength
         elif hero_choice == 2:
-            print(Hero.inventory)
+            print(Elias.inventory)
             inventory_usage = 0
             item_usage = input("What item do you want to use?")
-            while inventory_usage != 1:
-                for usingsearch in Hero.inventory:
-                    if usingsearch == item_usage:
-                        for canikkarie in item_data:
-                            if canikkarie["name"] == item_usage:
-                                if canikkarie["department"] == "defense":
-                                    Hero.health += canikkarie["price"]
-                                    inventory_usage = 1
-                                elif canikkarie["department"] == "offense":
-                                    enemyhealth -= canikkarie["price"]
-                                    inventory_usage = 1
+            for usingsearch in Elias.inventory:
+                if usingsearch == item_usage:
+                    for canikkarie in item_data:
+                        if canikkarie["name"] == item_usage:
+                            if canikkarie["department"] == "defense":
+                                Elias.health += canikkarie["price"]
+                            elif canikkarie["department"] == "offense":
+                                Elias.strength += canikkarie["price"]
+                            Elias.inventory.remove(item_usage)
+                            inventory_usage = 1
                     else:
                         print("Not found. Please try again.")
                         item_usage = input("What item do you want to use?")
@@ -132,37 +134,35 @@ class Enemy:
     def battle_hill(self, enemyname, enemyhealth, baseattack, enemyscore, enemyspeed, attackname, attackpower):
         print(f"An {enemyname} has spawned!""\n")
         print(f"Health:{enemyhealth}, Base A-6ttack:{baseattack}")
-        while (enemyhealth > 0) and (Hero.health > 0):            
-            if Hero.speed >= enemyspeed:
-                Enemy.hero_attack(enemyscore, enemyhealth)
-                Enemy.enemy_attack(enemyname, baseattack, enemyspeed, attackname, attackpower)
-                enemyspeed = Enemy.enemy_attack.speed
+        while (enemyhealth > 0) and (Elias.health > 0):            
+            if Elias.speed >= enemyspeed:
+                Neuabgrund.hero_attack(enemyscore, enemyhealth)
+                Neuabgrund.enemy_attack(enemyname, baseattack, enemyspeed, attackname, attackpower)
             else:
-                Enemy.enemy_attack(enemyname, baseattack, enemyspeed, attackname, attackpower)
-                enemyspeed = Enemy.enemy_attack.speed
-                Enemy.hero_attack(enemyscore, enemyhealth)
-            print(f"Your health:{Hero.health}")
+                Neuabgrund.enemy_attack(enemyname, baseattack, enemyspeed, attackname, attackpower)
+                Neuabgrund.hero_attack(enemyscore, enemyhealth)
+            print(f"Your health:{Elias.health}")
             print(f"Enemy health:{enemyhealth}")
-        if Enemy.health <= 0:
-            Enemy.death("Money", enemyname)
-            Hero.stats += enemyscore
-            Hero.balance += enemyscore
+        if enemyhealth <= 0:
+            Neuabgrund.death("Money", enemyname)
+            Elias.stats += enemyscore
+            Elias.balance += enemyscore
             print(f"Your balance and score has increased by {enemyscore}!")
 
     def death(self, loot, name):
         print("The",name,"has been slained.")
         print(f"{loot}""\n")
-        heroinventoryamount = len(Hero.inventory)
+        heroinventoryamount = len(Elias.inventory)
         if heroinventoryamount <= 5:
             while lootchoose not in loot:
                 lootchoose = input("Choose an item")
                 if lootchoose in loot:
-                    Hero.inventory.append(lootchoose)
+                    Elias.inventory.append(lootchoose)
                 else:
                     print("Invalid")
         else:
             print("Max inventory.")
-        Hero.strength = round(Hero.strength*1.1, 2)
+        Elias.strength = round(Elias.strength*1.1, 2)
 
     
 class Event:
@@ -171,18 +171,18 @@ class Event:
 
     def random_event_modifier(self, randomeventmodifier):
         if randomeventmodifier >= 900:
-            if (randomeventmodifier <= 900) and (randomeventmodifier <= 949):
-                Enemy.battle_hill("Goblin", 25, 5, 100, 25, ("Cut", "Treasure-Dive", "Lock", "Metronome"), (2, 6, 10, 5))
-            elif (randomeventmodifier <= 950) and (randomeventmodifier <= 974):
-                Enemy.battle_hill("Vampire", 75, 10, 200, 40, ("Batwave", "Bite", "Bloodshear", "Floatation Dive"), (5, 10, 20, 5))
-            elif (randomeventmodifier <= 975) and (randomeventmodifier <= 991):
-                Enemy.battle_hill("Witch", 150, 15, 500, 20, ("Staffswing", "Potions", "Blind Illusions", "Speed Potion"), (8, 15, 25, 10))
-            elif (randomeventmodifier <= 992) and (randomeventmodifier <= 997):
-                Enemy.battle_hill("Regi", 550, 50, 2000, 20, ("Ice Shard", "Bulk Stomp", "Mirage Blast", "Weight Loss"), (15, 30, 50, 15))
-            elif randomeventmodifier == (998 or 999):
-                Enemy.battle_hill("Balrog", 2500, 150, 5000, 30, ("Fire Punch", "Rojogrund", "Hellblast", "Burnt Terrain"), (50, 100, 500, 20))
+            if (randomeventmodifier >= 900) and (randomeventmodifier <= 949):
+                Neuabgrund.battle_hill("Goblin", 25, 5, 100, 25, ("Cut", "Treasure-Dive", "Lock", "Metronome"), (2, 6, 10, 5))
+            elif (randomeventmodifier >= 950) and (randomeventmodifier <= 974):
+                Neuabgrund.battle_hill("Vampire", 75, 10, 200, 40, ("Batwave", "Bite", "Bloodshear", "Floatation Dive"), (5, 10, 20, 5))
+            elif (randomeventmodifier >= 975) and (randomeventmodifier <= 991):
+                Neuabgrund.battle_hill("Witch", 150, 15, 500, 20, ("Staffswing", "Potions", "Blind Illusions", "Speed Potion"), (8, 15, 25, 10))
+            elif (randomeventmodifier >= 992) and (randomeventmodifier <= 997):
+                Neuabgrund  .battle_hill("Regi", 550, 50, 2000, 20, ("Ice Shard", "Bulk Stomp", "Mirage Blast", "Weight Loss"), (15, 30, 50, 15))
+            elif randomeventmodifier >= 998 and randomeventmodifier <= 999:
+                Neuabgrund.battle_hill("Balrog", 2500, 150, 5000, 30, ("Fire Punch", "Rojogrund", "Hellblast", "Burnt Terrain"), (50, 100, 500, 20))
             elif randomeventmodifier == 1000:
-                Enemy.battle_hill("Garry Kasparov", 28510, 800, 28510, 10, ("Check", "1996", "Kasparov's Immortal", "Rapid"), (100, Hero.maxhealth*0.1, 913, 10))
+                Neuabgrund.battle_hill("Garry Kasparov", 28510, 800, 28510, 10, ("Check", "1996", "Kasparov's Immortal", "Rapid"), (100, Hero.maxhealth*0.1, 913, 10))
 
 charactername = input("Choose character name.\n")
 turns = 0
@@ -196,7 +196,7 @@ prompt = tk.Label(window, text="Character status",
 font=("Calibri", 28))
 prompt.pack(pady=20)
 
-Elias = Hero(f"{charactername}", 100, 1000, ["wooden armor", "wooden sword"], 0, 100, 50, 30)
+Elias = Hero(f"{charactername}", 100, 1000, ["wooden armour", "wooden sword"], 0, 100, 50, 30)
 Breunat = Market()
 Neuabgrund = Enemy()
 Abstreich = Event()
