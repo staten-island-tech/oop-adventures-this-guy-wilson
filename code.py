@@ -27,7 +27,7 @@ class Market:
         pass
 
     def buy(self):
-        item = input("What would you like to do in the Market?""\n")
+        item = input("What would you like to do in the Market?\nOptions: Buy, Check, Inventory\n")
         while item not in ("exit","end"):
             if item == "check":
                 self.check(item_data)
@@ -69,7 +69,6 @@ class Market:
                     else:
                         print("You have too much items in your inventory.")
 
-4
 class Enemy:
     def __init__(self):
         pass
@@ -99,8 +98,7 @@ class Enemy:
     
     def hero_attack(self, enemyscore, enemyhealth):
         global defense
-        hero_choice = int(input("Select action"))
-        print("Select options\n""[1] - Attack\n""[2] - Inventory\n""[3] - Defend\n""[4] - Flee\n")
+        hero_choice = int(input("Select options\n""[1] - Attack\n""[2] - Inventory\n""[3] - Defend\n""[4] - Flee\n"))
         if hero_choice == 3:
             defense += 20
         elif hero_choice == 4:
@@ -261,7 +259,5 @@ while Elias.health > 0:
         text = f"Inventory:{Elias.inventory}")
 print(f"{Elias.name} has died! Your final score is {Elias.stats}")
 print(f"Turns survived:{turns}")
-
-
 
 window.mainloop()
