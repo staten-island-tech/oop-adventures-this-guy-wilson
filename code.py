@@ -183,7 +183,7 @@ class Event:
             elif randomeventmodifier >= 998 and randomeventmodifier <= 999:
                 Neuabgrund.battle_hill("Balrog", 2500, 150, 5000, 30, ("Fire Punch", "Rojogrund", "Hellblast", "Burnt Terrain"), (50, 100, 500, 20))
             elif randomeventmodifier == 1000:
-                Neuabgrund.battle_hill("Garry Kasparov", 28510, 800, 28510, 10, ("Check", "1996", "Kasparov's Immortal", "Rapid"), (100, Hero.maxhealth*0.1, 913, 10))
+                Neuabgrund.battle_hill("Garry Kasparov", 28510, 800, 28510, 10, ("Check", "1996", "Kasparov's Immortal", "Rapid"), (100, Elias.maxhealth*0.1, 913, 10))
 
 charactername = input("Choose character name.\n")
 turns = 0
