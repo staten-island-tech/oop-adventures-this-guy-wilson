@@ -28,14 +28,15 @@ class Market:
 
     def buy(self):
         item = input("What would you like to do in the Market?""\n")
-        while (item != "exit") or (item != "end"):
+        while item not in ("exit","end"):
             if item == "check":
-               Market.check(item_data)
-            elif item == "inventory":   
-                print(Hero.inventory)
+                self.check(item_data)
+            elif item == "inventory":
+                print("Inventory:", Elias.inventory)
             elif item == "buy":
-                Market.cashier(Hero.balance)
-            item = input("What else would you like to do?")
+                self.cashier(Elias.balance)
+            
+            item = input("What would you like to do in the Market?""\n")
 
     def check(self, market_items):
         for e in market_items:
@@ -45,27 +46,26 @@ class Market:
         sonion = input("What do you want to buy?")
         for i in item_data:
             if sonion == i["name"]:
-                print("Item Price:",int(i["price"]),"\n","Your balance:", balance, "\n")
+                print(f"Item Price: {int(i['price'])}\nYour balance: {balance}\n")
                 if int(i["price"]) > int(balance):
                     print("You cannot buy this item""\n")
                 else:
-                    inventory_amount = len(Hero.inventory)
-                    if inventory_amount < 5:
+                    if len(Elias.inventory) < 5:
                         balance -= int(i["price"])
                         if sonion == "health potion":
-                            Hero.health += 50
-                            if Hero.health > Hero.maxhealth:
-                                Hero.health = Hero.maxhealth
+                            Elias.health += 50
+                            if Elias.health > Elias.maxhealth:
+                                Elias.health = Elias.maxhealth
                         elif sonion == "speed potion":
-                            Hero.speed += 20
+                            Elias.speed += 20
                         elif sonion == "strength potion":
-                            Hero.strength += 20
+                            Elias.strength += 20
                         elif sonion == "boost potion":
-                            Hero.maxhealth += 50
+                            Elias.maxhealth += 50
                         else:
-                            Hero.inventory.append(sonion["name"])
-                            print(f"{i["name"]} was purchased!""\n")
-                            Hero.balance == balance
+                            Elias.inventory.append(sonion)
+                            print(f"{i['name']} was purchased!""\n")
+                            Elias.balance = balance
                     else:
                         print("You have too much items in your inventory.")
 
