@@ -114,35 +114,43 @@ class Enemy:
             enemyhealth -= Elias.strength
         elif hero_choice == 2:
             print(Elias.inventory)
-            inventory_usage = 0
             item_usage = input("What item do you want to use?")
-            for usingsearch in Elias.inventory:
-                if usingsearch == item_usage:
-                    for canikkarie in item_data:
-                        if canikkarie["name"] == item_usage:
-                            if canikkarie["department"] == "defense":
-                                Elias.health += canikkarie["price"]
-                            elif canikkarie["department"] == "offense":
-                                Elias.strength += canikkarie["price"]
-                            Elias.inventory.remove(item_usage)
-                            inventory_usage = 1
-                    else:
-                        print("Not found. Please try again.")
-                        item_usage = input("What item do you want to use?")
+            item_found = False
+            if item_usage in Elias.inventory:
+                for item in item_data:
+                    if item["name"] == item_usage:
+                        if item["department"] == "defense":
+                            Elias.health += int(item["price"])
+                            if Elias.health > Elias.maxhealth:
+                                Elias.health = Elias.maxhealth
+                        elif item["department"] == "offense":
+                            Elias.strength += int(item["price"])
+                        elif item["department"] == "attack":
+                            Elias.speed += int(item["price"])
+                        Elias.inventory.remove(item_usage)
+                        print(f"{item_usage} was used!")
+                        item_found = True
+                        break
+            if not item_found:
+                print("You don't have this item in your inventory.")
+                    
         return enemyscore, enemyhealth
 
     def battle_hill(self, enemyname, enemyhealth, baseattack, enemyscore, enemyspeed, attackname, attackpower):
         print(f"An {enemyname} has spawned!""\n")
-        print(f"Health:{enemyhealth}, Base A-6ttack:{baseattack}")
+        print(f"Health:{enemyhealth}, Base Attack:{baseattack}")
         while (enemyhealth > 0) and (Elias.health > 0):            
             if Elias.speed >= enemyspeed:
-                Neuabgrund.hero_attack(enemyscore, enemyhealth)
+                enemyscore, enemyhealth = Neuabgrund.hero_attack(enemyscore, enemyhealth)
                 Neuabgrund.enemy_attack(enemyname, baseattack, enemyspeed, attackname, attackpower)
             else:
                 Neuabgrund.enemy_attack(enemyname, baseattack, enemyspeed, attackname, attackpower)
-                Neuabgrund.hero_attack(enemyscore, enemyhealth)
+                enemyscore, enemyhealth = Neuabgrund.hero_attack(enemyscore, enemyhealth)
+            
             print(f"Your health:{Elias.health}")
             print(f"Enemy health:{enemyhealth}")
+        4
+
         if enemyhealth <= 0:
             Neuabgrund.death("Money", enemyname)
             Elias.stats += enemyscore
@@ -152,16 +160,13 @@ class Enemy:
     def death(self, loot, name):
         print("The",name,"has been slained.")
         print(f"{loot}""\n")
-        heroinventoryamount = len(Elias.inventory)
-        if heroinventoryamount <= 5:
-            while lootchoose not in loot:
-                lootchoose = input("Choose an item")
-                if lootchoose in loot:
-                    Elias.inventory.append(lootchoose)
-                else:
-                    print("Invalid")
+        weapon_drop = random.choice(["wooden sword", "iron sword", "steel sword", "diamond sword"])
+        if len(Elias.inventory) <= 5:
+            Elias.inventory.append(weapon_drop)
+            print(f"The {name} dropped a {weapon_drop}!")
         else:
-            print("Max inventory.")
+            print("Your inventory is full, you cannot pick up the dropped item.")
+
         Elias.strength = round(Elias.strength*1.1, 2)
 
     
