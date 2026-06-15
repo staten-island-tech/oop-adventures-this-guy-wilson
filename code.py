@@ -133,7 +133,6 @@ class Enemy:
                         break
             if not item_found:
                 print("You don't have this item in your inventory.")
-                    
         return enemyscore, enemyhealth
 
     def battle_hill(self, enemyname, enemyhealth, baseattack, enemyscore, enemyspeed, attackname, attackpower):
@@ -149,7 +148,6 @@ class Enemy:
             
             print(f"Your health:{Elias.health}")
             print(f"Enemy health:{enemyhealth}")
-        4
 
         if enemyhealth <= 0:
             Neuabgrund.death("Money", enemyname)
